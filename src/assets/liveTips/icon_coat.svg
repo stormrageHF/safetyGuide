@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon_coat</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.300243 0 0 0 0 0.300243 0 0 0 0 0.300243 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="首页-和-目的地" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g filter="url(#filter-1)" id="编组-15备份">
+            <g transform="translate(3.000000, 6.000000)">
+                <polygon id="路径-13" stroke="#FFFFFF" stroke-width="1.62" points="16.5894187 0.81 22.275 4.11710059 22.275 38.07 12.9640099 38.07 13.6136139 16.0226627 5.31245519 37.4249551 0.405 35.4075659 10.1490594 6.76278107 15.4015714 4.11710059"></polygon>
+                <polygon id="路径-13备份" stroke="#FFFFFF" stroke-width="1.62" transform="translate(33.210000, 19.440000) scale(-1, 1) translate(-33.210000, -19.440000) " points="38.4261298 0.81 44.145 4.11710059 44.145 38.07 34.2646447 38.07 35.374797 16.0226627 27.0870959 37.0059817 22.275 35.2355912 31.8223096 6.76278107 37.2081342 4.11710059"></polygon>
+                <line x1="16.605" y1="0.405" x2="27.7269231" y2="0.405" id="路径-14" stroke="#FFFFFF" stroke-width="1.62"></line>
+                <line x1="14.985" y1="4.05" x2="22.275" y2="8.91" id="路径-15" stroke="#FFFFFF" stroke-width="1.62"></line>
+                <line x1="22.275" y1="8.91" x2="29.565" y2="4.05" id="路径-16" stroke="#FFFFFF" stroke-width="1.62"></line>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon_frozenroad</title>
+    <g id="首页-和-目的地" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="路径-32" fill="#4D4D4D" points="15.5 43.5 17.2142857 29.5 20.6428571 29.5 21.5 43.5"></polygon>
+        <g id="编组-28" transform="translate(31.632064, 20.984089) rotate(49.000000) translate(-31.632064, -20.984089) translate(15.632064, 6.984089)">
+            <polygon id="路径-32备份" fill="#4D4D4D" points="12 28 12.8571429 14 14.5714286 14 15 28"></polygon>
+            <polygon id="路径-32备份-2" fill="#4D4D4D" transform="translate(10.094978, 20.491387) rotate(-57.000000) translate(-10.094978, -20.491387) " points="9.09497838 25.4913866 9.66640695 15.4913866 10.8092641 15.4913866 11.0949784 25.4913866"></polygon>
+            <path d="M22.5,21 C26.0898509,21 31.4785486,18.0682732 31.4785486,14.4784223 C31.4785486,10.8885714 26.0898509,8 22.5,8 C18.9101491,8 16,10.9101491 16,14.5 C16,18.0898509 18.9101491,21 22.5,21 Z" id="椭圆形备份-7" stroke="#4D4D4D" stroke-width="2"></path>
+            <path d="M3.5,20 C5.43299662,20 8.4302455,16.5718082 8.4302455,14.6388116 C8.4302455,12.705815 5.43299662,13 3.5,13 C1.56700338,13 1.45519152e-11,14.5670034 1.45519152e-11,16.5 C1.45519152e-11,18.4329966 1.56700338,20 3.5,20 Z" id="椭圆形备份-13" stroke="#4D4D4D" stroke-width="2"></path>
+            <path d="M25.1966625,8.0140656 C25.1966625,3.87192998 19.6421356,0 15.5,0 C11.3578644,0 8,3.35786438 8,7.5 C8,11.6421356 11.3578644,15 15.5,15" id="路径" stroke="#4D4D4D" stroke-width="2"></path>
+        </g>
+        <path d="M5,19.5 C5.66666667,21.1666667 6.83333333,22 8.5,22 C10.1666667,22 11.1666667,22 11.5,22" id="路径-33" stroke="#4D4D4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(8.250000, 20.750000) scale(-1, 1) translate(-8.250000, -20.750000) "></path>
+        <path d="M5,24.5 C6.66666667,26.1666667 8.33333333,27 10,27 C11.6666667,27 12.6666667,27 13,27" id="路径-33备份" stroke="#4D4D4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(9.000000, 25.750000) scale(-1, 1) translate(-9.000000, -25.750000) "></path>
+        <path d="M5,29.5 C7,31.1666667 9,32 11,32 C13,32 14,32 14,32" id="路径-33备份-2" stroke="#4D4D4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(9.500000, 30.750000) scale(-1, 1) translate(-9.500000, -30.750000) "></path>
+    </g>
+</svg>
