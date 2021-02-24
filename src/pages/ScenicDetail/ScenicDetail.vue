@@ -50,27 +50,27 @@
 </template>
 
 <script>
-import ScenicInfo from "./ScenicInfo/ScenicInfo";
-import ScenicAround from "./ScenicAround/ScenicAround";
+import ScenicInfo from './ScenicInfo/ScenicInfo'
+import ScenicAround from './ScenicAround/ScenicAround'
 import {
   GetScenicDetail,
   GetBusDataByPage,
   GetParkDataByPage,
   GetSubwayDataByPage,
-  GetMedicalData,
-} from "../../api/index";
-import Vue from "vue";
-import { Toast } from "vant";
+  GetMedicalData
+} from '../../api/index'
+import Vue from 'vue'
+import { Toast } from 'vant'
 
-Vue.use(Toast);
+import AMap from 'AMap'
 
-import AMap from "AMap"; // 引入高德地图
+Vue.use(Toast) // 引入高德地图
 
 export default {
-  name: "ScenicDetail",
-  data() {
+  name: 'ScenicDetail',
+  data () {
     return {
-      scenicid: localStorage.scenicId || "",
+      scenicid: localStorage.scenicId || '',
       scenicData: null,
       sMap: null, // 高德
       active: 0,
@@ -85,52 +85,52 @@ export default {
       metroMakers: [],
       MedicalDatas: [], // 周边医疗机构
       selectScenicMarker: null, // 点击景区信息显示marker
-      ScenicName: this.$route.params.name || '',
-    };
+      ScenicName: this.$route.params.name || ''
+    }
   },
   methods: {
-      onClickLeft() {
-      this.$router.go(-1);
+    onClickLeft () {
+      this.$router.go(-1)
     },
-    tabClick(name) {
+    tabClick (name) {
       // console.log(name);
       // 周边
-      const that = this;
+      const that = this
       if (name === 1) {
         setTimeout(() => {
-          that.$refs.ScenicAroundRef.MedicalDatas = that.MedicalDatas;
-          that.$refs.ScenicAroundRef.setUnSelected();
-        }, 300);
+          that.$refs.ScenicAroundRef.MedicalDatas = that.MedicalDatas
+          that.$refs.ScenicAroundRef.setUnSelected()
+        }, 300)
       } else {
         setTimeout(() => {
-          that.$refs.ScenicInfoRef.sourceData = that.scenicData;
+          that.$refs.ScenicInfoRef.sourceData = that.scenicData
           // 回到景点中心
-          that.sMap.setCenter(that.scenicMarker.getPosition());
-        }, 300);
+          that.sMap.setCenter(that.scenicMarker.getPosition())
+        }, 300)
       }
     },
     // 详情接口
-    async GetScenicDetailAsync() {
-      const that = this;
+    async GetScenicDetailAsync () {
+      const that = this
       const r = await GetScenicDetail({
-        scenicid: that.scenicid,
-      });
+        scenicid: that.scenicid
+      })
       if (r.code === 1) {
-        console.log(r.data);
-        that.scenicData = r.data;
-        that.$refs.ScenicInfoRef.setScenicInfo(that.scenicData);
-        that.createMaker();
+        console.log(r.data)
+        that.scenicData = r.data
+        that.$refs.ScenicInfoRef.setScenicInfo(that.scenicData)
+        that.createMaker()
       }
     },
     // 创建 maker
-    createMaker() {
-      const that = this;
+    createMaker () {
+      const that = this
       // 数据
-      const centers = that.scenicData.Center.split(",");
-      that.sMap.setCenter(centers);
+      const centers = that.scenicData.Center.split(',')
+      that.sMap.setCenter(centers)
       // console.log(centers);
       var content =
-        '<img class="imgMaker" src=' + that.scenicData.PicLink + ">";
+        '<img class="imgMaker" src=' + that.scenicData.PicLink + '>'
       // 将 Icon 实例添加到 marker 上:
       var marker = new AMap.Marker({
         position: new AMap.LngLat(centers[0], centers[1]),
@@ -138,24 +138,24 @@ export default {
         // icon: icon, // 添加 Icon 实例
         content: content,
         title: that.scenicData.Name,
-        zoom: 13,
-      });
-      that.sMap.add(marker);
-      that.scenicMarker = marker;
+        zoom: 13
+      })
+      that.sMap.add(marker)
+      that.scenicMarker = marker
       //
     },
     // 删除 maker
-    removeMaker() {},
+    removeMaker () {},
     // 创建 icon maker
-    createIconMaker(data, type) {
+    createIconMaker (data, type) {
       // const that = this;
-      const centers = data.Center.split(",");
-      let picUrl = require("../../assets/scenic/icon_bus.svg");
+      const centers = data.Center.split(',')
+      let picUrl = require('../../assets/scenic/icon_bus.svg')
       // picUrl = 'http://101.200.177.46:8073/imgs/linshi/icon_bus.svg';
-      if (type === "park") {
-        picUrl = require("../../assets/scenic/icon_parking.svg");
-      } else if (type === "metro") {
-        picUrl = require("../../assets/scenic/icon_metro.svg");
+      if (type === 'park') {
+        picUrl = require('../../assets/scenic/icon_parking.svg')
+      } else if (type === 'metro') {
+        picUrl = require('../../assets/scenic/icon_metro.svg')
       }
       // console.log(picUrl);
 
@@ -173,71 +173,71 @@ export default {
         icon: picUrl, // 添加 Icon 实例
         // content: content,
         // title: that.scenicData.Name,
-        zoom: 10,
-      });
+        zoom: 10
+      })
 
-      marker.on("click", () => {
+      marker.on('click', () => {
         marker.setLabel({
           content: data.Name,
-          direction: "top",
-          offset: new AMap.Pixel(0, -20),
-        });
+          direction: 'top',
+          offset: new AMap.Pixel(0, -20)
+        })
         setTimeout(() => {
           marker.setLabel({
-            content: "",
-          });
-        }, 1000);
-      });
+            content: ''
+          })
+        }, 1000)
+      })
 
       // that.sMap.add(marker);
-      return marker;
+      return marker
     },
     // 创建 公交车 maker
-    createBusMakers(buses) {
+    createBusMakers (buses) {
       // console.log(buses);
-      const that = this;
+      const that = this
       if (that.busMakers.length) {
-        that.sMap.remove(that.busMakers);
+        that.sMap.remove(that.busMakers)
       }
-      that.busMakers = [];
+      that.busMakers = []
       buses.forEach((bus) => {
-        const marker = that.createIconMaker(bus, "bus");
-        that.busMakers.push(marker);
-      });
-      that.sMap.add(that.busMakers);
+        const marker = that.createIconMaker(bus, 'bus')
+        that.busMakers.push(marker)
+      })
+      that.sMap.add(that.busMakers)
     },
     // 停车场 maker
-    createParkMakers(parks) {
-      const that = this;
+    createParkMakers (parks) {
+      const that = this
       if (that.parkMakers.length) {
-        that.sMap.remove(that.parkMakers);
+        that.sMap.remove(that.parkMakers)
       }
-      that.parkMakers = [];
+      that.parkMakers = []
       parks.forEach((park) => {
-        const marker = that.createIconMaker(park, "park");
-        that.parkMakers.push(marker);
-      });
-      that.sMap.add(that.parkMakers);
+        const marker = that.createIconMaker(park, 'park')
+        that.parkMakers.push(marker)
+      })
+      that.sMap.add(that.parkMakers)
     },
     // 地铁 maker
-    createMetroMakers(metros) {
-      const that = this;
+    createMetroMakers (metros) {
+      const that = this
       if (that.metroMakers.length) {
-        that.sMap.remove(that.metroMakers);
+        that.sMap.remove(that.metroMakers)
       }
-      that.metroMakers = [];
+      that.metroMakers = []
       metros.forEach((metro) => {
-        const marker = that.createIconMaker(metro, "metro");
-        that.metroMakers.push(marker);
-      });
-      that.sMap.add(that.metroMakers);
+        const marker = that.createIconMaker(metro, 'metro')
+        that.metroMakers.push(marker)
+      })
+      that.sMap.add(that.metroMakers)
     },
     // 选医疗机构
-    selectMedical(medicalInfo) {
-      const medical = medicalInfo.medical;
-      const _index = medicalInfo.index;
-      const centers = medical.Center.split(",");
-      this.createScenicMarker( 'M'+_index, centers, medical.Name);
+    selectMedical (medicalInfo) {
+      const medical = medicalInfo.medical
+      const _index = medicalInfo.index
+      const centers = medical.Center.split(',')
+      this.createScenicMarker('M' + _index, centers, medical.Name)
 
       // const that = this;
       // // 根绝医疗名称查地址
@@ -253,191 +253,190 @@ export default {
       //     Toast.fail("未查到相关记录");
       //   }
       // });
-
     },
-    createMedicalMaker(lat, lng) {
-      const that = this;
-      const position = [lat, lng];
-      that.addMarker(position);
+    createMedicalMaker (lat, lng) {
+      const that = this
+      const position = [lat, lng]
+      that.addMarker(position)
     },
-    addMarker(position) {
+    addMarker (position) {
       if (this.medicalMaker) {
-        this.medicalMaker.setMap(null);
-        this.medicalMaker = null;
+        this.medicalMaker.setMap(null)
+        this.medicalMaker = null
       }
       this.medicalMaker = new AMap.Marker({
         // icon: require('../../assets/scenic/icon_hospital.svg'),
         // icon: "../../assets/scenic/icon_hospital.svg",
         // icon: "http://101.200.177.46:8073/imgs/linshi/icon_bus.svg",
-        position: position,
+        position: position
         // offset: new AMap.Pixel(-13, -30),
-      });
+      })
       // this.medicalMaker.setMap(this.sMap);
-      this.sMap.add(this.medicalMaker);
+      this.sMap.add(this.medicalMaker)
     },
     // 分页获取公交车
-    async GetBusDataByPageAsync(_PageIndex) {
-      const that = this;
+    async GetBusDataByPageAsync (_PageIndex) {
+      const that = this
       const r = await GetBusDataByPage({
         scenicid: that.scenicid,
-        PageIndex: _PageIndex,
-      });
+        PageIndex: _PageIndex
+      })
       if (r.code === 1) {
-        that.$refs.ScenicInfoRef.setBusData(r.data);
-        that.buses = r.data.DataList;
+        that.$refs.ScenicInfoRef.setBusData(r.data)
+        that.buses = r.data.DataList
         // that.createBusMakers(that.buses);
       }
     },
     // 分页获取公交车
-    GetBusWithPage(page) {
-      this.GetBusDataByPageAsync(page);
+    GetBusWithPage (page) {
+      this.GetBusDataByPageAsync(page)
     },
     // 分页获停车场
-    async GetParkDataByPageAsync(_PageIndex) {
-      const that = this;
+    async GetParkDataByPageAsync (_PageIndex) {
+      const that = this
       const r = await GetParkDataByPage({
         scenicid: that.scenicid,
-        PageIndex: _PageIndex,
-      });
+        PageIndex: _PageIndex
+      })
       if (r.code === 1) {
-        that.$refs.ScenicInfoRef.setParkData(r.data);
-        that.parks = r.data.DataList;
+        that.$refs.ScenicInfoRef.setParkData(r.data)
+        that.parks = r.data.DataList
         // that.createParkMakers(that.parks);
       }
     },
     // 分页获取停车场
-    GetParkWithPage(page) {
-      this.GetParkDataByPageAsync(page);
+    GetParkWithPage (page) {
+      this.GetParkDataByPageAsync(page)
     },
     // 分页获取地铁
-    async GetSubwayDataByPageAsync(_PageIndex) {
-      const that = this;
+    async GetSubwayDataByPageAsync (_PageIndex) {
+      const that = this
       const r = await GetSubwayDataByPage({
         scenicid: that.scenicid,
-        PageIndex: _PageIndex,
-      });
+        PageIndex: _PageIndex
+      })
       if (r.code === 1) {
-        that.$refs.ScenicInfoRef.setSubwayData(r.data);
-        that.metros = r.data.DataList;
+        that.$refs.ScenicInfoRef.setSubwayData(r.data)
+        that.metros = r.data.DataList
         // that.createMetroMakers(that.metros);
       }
     },
     // 分页获取地铁
-    GetSubwayWithPage(page) {
-      this.GetSubwayDataByPageAsync(page);
+    GetSubwayWithPage (page) {
+      this.GetSubwayDataByPageAsync(page)
     },
     // 获取周边医疗机构
-    async GetMedicalDataAsync() {
-      const that = this;
+    async GetMedicalDataAsync () {
+      const that = this
       const r = await GetMedicalData({
-        scenicid: that.scenicid,
-      });
+        scenicid: that.scenicid
+      })
       if (r.code === 1) {
         //  console.log(r.data);
-        that.MedicalDatas = r.data;
+        that.MedicalDatas = r.data
       }
     },
     // 创建select marker
-    createScenicMarker(text, centers, name){
+    createScenicMarker (text, centers, name) {
       // 删除已经有的
       this.selectScenicMarker && this.sMap.remove(this.selectScenicMarker)
-       // 点标记显示内容，HTML要素字符串
+      // 点标记显示内容，HTML要素字符串
       // let _src = require("../../assets/scenic/icon_place.svg");
-      let _text = text;
+      const _text = text
       var markerContent =
-        "" +
+        '' +
         '<div class="custom-content-marker">' +
         '   <div class="marker-text">' + _text + '</div>' +
-        "</div>";
+        '</div>'
 
       this.selectScenicMarker = new AMap.Marker({
         position: new AMap.LngLat(centers[0], centers[1]),
         offset: new AMap.Pixel(-22, -22),
         content: markerContent,
         title: name,
-        zoom: 10,
-      });
-      this.sMap.add(this.selectScenicMarker);
-      this.sMap.setCenter(centers);
+        zoom: 10
+      })
+      this.sMap.add(this.selectScenicMarker)
+      this.sMap.setCenter(centers)
       // 点击事件
-      this.selectScenicMarker.on("click", () => {
-        console.log('marker click');
+      this.selectScenicMarker.on('click', () => {
+        console.log('marker click')
         this.selectScenicMarker.setLabel({
           content: name,
-          direction: "top",
-          offset: new AMap.Pixel(0, -20),
-        });
+          direction: 'top',
+          offset: new AMap.Pixel(0, -20)
+        })
         setTimeout(() => {
           this.selectScenicMarker.setLabel({
-            content: "",
-          });
-        }, 2000);
-      });
+            content: ''
+          })
+        }, 2000)
+      })
     },
     // 点击公交车
-    selectBus(busInfo) {
+    selectBus (busInfo) {
       // console.log(busInfo);
-      const bus = busInfo.bus;
-      const _index = busInfo.index;
-      const centers = bus.Center.split(",");
-      this.createScenicMarker( 'B'+_index, centers, bus.Name);
+      const bus = busInfo.bus
+      const _index = busInfo.index
+      const centers = bus.Center.split(',')
+      this.createScenicMarker('B' + _index, centers, bus.Name)
     },
     // 点击停车场
-    selectPark(parkInfo) {
+    selectPark (parkInfo) {
       // console.log(parkInfo);
-      const park = parkInfo.park;
-      const _index = parkInfo.index;
-      const centers = park.Center.split(",");
-      this.createScenicMarker( 'P'+_index, centers, park.Name);
+      const park = parkInfo.park
+      const _index = parkInfo.index
+      const centers = park.Center.split(',')
+      this.createScenicMarker('P' + _index, centers, park.Name)
     },
     // 点击停车场
-    selectSubway(subwayInfo) {
+    selectSubway (subwayInfo) {
       // console.log(subwayInfo);
-      const subWay = subwayInfo.subWay;
-      const _index = subwayInfo.index;
-      const centers = subWay.Center.split(",");
-      this.createScenicMarker( 'S'+_index, centers, subWay.Name);
-    },
+      const subWay = subwayInfo.subWay
+      const _index = subwayInfo.index
+      const centers = subWay.Center.split(',')
+      this.createScenicMarker('S' + _index, centers, subWay.Name)
+    }
   },
-  mounted() {
-    const that = this;
-    that.GetScenicDetailAsync();
+  mounted () {
+    const that = this
+    that.GetScenicDetailAsync()
     // 获取第一页的公交车信息
-    that.GetBusWithPage(1);
+    that.GetBusWithPage(1)
     // 获取第一页停车场信息
-    that.GetParkWithPage(1);
+    that.GetParkWithPage(1)
     // 获取第一页地铁信息
-    that.GetSubwayWithPage(1);
+    that.GetSubwayWithPage(1)
     // 获取周边医疗
-    that.GetMedicalDataAsync();
+    that.GetMedicalDataAsync()
     // 获取高德地图
-    that.sMap = new AMap.Map("mapScenic", {
+    that.sMap = new AMap.Map('mapScenic', {
       zoom: 14,
       resizeEnable: true,
-      viewMode: "3D",
-    });
+      viewMode: '3D'
+    })
     // placesearch
-    AMap.plugin("AMap.PlaceSearch", function () {
+    AMap.plugin('AMap.PlaceSearch', function () {
       var autoOptions = {
         city: sessionStorage.cityName,
         citylimit: true,
-        map: that.sMap,
-      };
-      that.PlaceSearch = new AMap.PlaceSearch(autoOptions);
-    });
+        map: that.sMap
+      }
+      that.PlaceSearch = new AMap.PlaceSearch(autoOptions)
+    })
   },
   components: {
     ScenicInfo,
-    ScenicAround,
-  },
-};
+    ScenicAround
+  }
+}
 </script>
 
 <style scoped>
 #mapScenic {
   width: 100%;
   /* height: calc(100vw * 4 / 3); */
-  height: 333px;
+  height: 222px;
   margin: 0 auto;
 }
 .tabTitle {
@@ -471,7 +470,7 @@ export default {
   background-color: #016f7e;
 }
 .van-tabs__content {
-  height: calc(100vh - 333px - 44px - 46px);
+  height: calc(100vh - 222px - 44px - 46px);
   overflow-y: scroll;
 }
 </style>
@@ -500,5 +499,13 @@ export default {
 
 .van-nav-bar__text, .van-nav-bar .van-icon {
   color: #0e6f7d
+}
+
+.van-pagination {
+  font-size: 12px;
+}
+.van-pagination__item {
+  height: 30px;
+  min-width: 32px;
 }
 </style>

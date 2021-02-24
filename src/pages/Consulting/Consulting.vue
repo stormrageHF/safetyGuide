@@ -10,31 +10,31 @@
 
 <script>
 export default {
-  name: "Consulting",
-  data() {
+  name: 'Consulting',
+  data () {
     return {
       imgArr: [
-        require("../../assets/images/consulting/button_Consulting01.jpg"),
-        require("../../assets/images/consulting/button_Consulting02.jpg"),
-        require("../../assets/images/consulting/button_Consulting03.jpg"),
-        require("../../assets/images/consulting/button_Consulting04.jpg"),
-        require("../../assets/images/consulting/button_Consulting05.jpg"),
-        require("../../assets/images/consulting/button_Consulting06.jpg"),
-        require("../../assets/images/consulting/button_Consulting07.jpg"),
-      ],
-    };
+        require('../../assets/images/consulting/button_Consulting01.jpg'),
+        require('../../assets/images/consulting/button_Consulting02.jpg'),
+        require('../../assets/images/consulting/button_Consulting03.jpg'),
+        require('../../assets/images/consulting/button_Consulting04.jpg'),
+        require('../../assets/images/consulting/button_Consulting05.jpg'),
+        require('../../assets/images/consulting/button_Consulting06.jpg'),
+        require('../../assets/images/consulting/button_Consulting07.jpg')
+      ]
+    }
   },
   methods: {
-    itemClick(t) {
+    itemClick (t) {
       this.$router.push({
-        name: "details",
+        name: 'details',
         params: {
-          id: "consult" + t,
-        },
-      });
-    },
-  },
-};
+          id: 'consult' + t
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

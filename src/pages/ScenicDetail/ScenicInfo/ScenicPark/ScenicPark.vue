@@ -7,7 +7,7 @@
         v-for="(park,index) in ParkDatas"
         :key="park.Id"
       >
-        <div class="content_item" 
+        <div class="content_item"
         @click="clickPark(park,(index+1))"
         :class="{ actived: park.isSelected }">
          <div>
@@ -38,45 +38,45 @@
 
 <script>
 export default {
-  name: "ScenicPark",
-  data() {
+  name: 'ScenicPark',
+  data () {
     return {
       CurrentPage: 1,
       ParkDatas: [],
       totalNum: 100,
       pageSize: 5,
-      TotalPage: 1,
-    };
+      TotalPage: 1
+    }
   },
   methods: {
-    setPark(data) {
+    setPark (data) {
       if (!data) {
-        return;
+        return
       }
-      this.ParkDatas = data.DataList;
-      this.CurrentPage = data.CurrentPage;
-      this.totalNum = data.totalNum;
-      this.TotalPage = data.TotalPage;
+      this.ParkDatas = data.DataList
+      this.CurrentPage = data.CurrentPage
+      this.totalNum = data.totalNum
+      this.TotalPage = data.TotalPage
     },
-    pageChange(page) {
-      this.$emit("page-change", page);
+    pageChange (page) {
+      this.$emit('page-change', page)
     },
-    clickPark(park, index){
-      this.$emit('click-park', { park, index });
+    clickPark (park, index) {
+      this.$emit('click-park', { park, index })
       // this.setUnSelected();
-      park.isSelected = true;
-      this.$forceUpdate();
+      park.isSelected = true
+      this.$forceUpdate()
     },
     // 设置全部未选中
-    setUnSelected() {
+    setUnSelected () {
       if (this.ParkDatas) {
         this.ParkDatas.forEach((item) => {
-         item.isSelected = false;
-        });
+          item.isSelected = false
+        })
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -84,7 +84,7 @@ export default {
   margin-top: 10px;
 }
 .traffic_content > div:nth-child(1) {
-  padding-top: 5px;
+  /* padding-top: 5px; */
   font-size: 12px;
   color: #4d4d4d;
   letter-spacing: 0.75px;
@@ -93,7 +93,7 @@ export default {
   margin-bottom: 20px;
 }
 .content_item {
-  min-height: 35px;
+  min-height: 20px;
   display: flex;
   align-items: center;
 }

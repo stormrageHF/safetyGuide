@@ -38,43 +38,43 @@
 </template>
 
 <script>
-import * as echarts from "echarts";
+import * as echarts from 'echarts'
 
 export default {
-  name: "Diet",
-  data() {
+  name: 'Diet',
+  data () {
     return {
       dietInfo: null,
       myChart: null,
       localSnacks: [],
       flavorValue: [],
-      Describe: "",
-      imgSrc: 'http://101.200.177.46:8073/imgs/dietimages/icon_food_default.svg',
-    };
+      Describe: '',
+      imgSrc: 'http://101.200.177.46:8073/imgs/dietimages/icon_food_default.svg'
+    }
   },
   methods: {
-    setData(data) {
-      console.log('设置表格');
-      this.dietInfo = data;
-      this.Describe = data.Describe;
-      this.localSnacks = data.LocalSnacks;
+    setData (data) {
+      console.log('设置表格')
+      this.dietInfo = data
+      this.Describe = data.Describe
+      this.localSnacks = data.LocalSnacks
       // 口味
-      this.flavorValue = [];
-      this.flavorValue.push(this.dietInfo.Suan);
-      this.flavorValue.push(this.dietInfo.Tian);
-      this.flavorValue.push(this.dietInfo.You);
-      this.flavorValue.push(this.dietInfo.La);
-      this.flavorValue.push(this.dietInfo.Xian);
-      this.flavorValue.push(this.dietInfo.Xian1);
-      this.flavorValue.push(this.dietInfo.Ma);
+      this.flavorValue = []
+      this.flavorValue.push(this.dietInfo.Suan)
+      this.flavorValue.push(this.dietInfo.Tian)
+      this.flavorValue.push(this.dietInfo.You)
+      this.flavorValue.push(this.dietInfo.La)
+      this.flavorValue.push(this.dietInfo.Xian)
+      this.flavorValue.push(this.dietInfo.Xian1)
+      this.flavorValue.push(this.dietInfo.Ma)
       // 设置口味
-      this.setRadarCharts();
+      this.setRadarCharts()
     },
-    createRadarCharts() {
-      console.log("charts");
-      const chartDom = document.getElementById("radarChart");
-      this.myChart = echarts.init(chartDom);
-      var option;
+    createRadarCharts () {
+      console.log('charts')
+      const chartDom = document.getElementById('radarChart')
+      this.myChart = echarts.init(chartDom)
+      var option
       //
       option = {
         title: {
@@ -88,69 +88,69 @@ export default {
           // shape: 'circle',
           name: {
             textStyle: {
-              color: "black",
-              fontSize: 12,
-            },
+              color: 'black',
+              fontSize: 12
+            }
           },
           indicator: [
-            { name: "酸", max: 3 },
-            { name: "甜", max: 3 },
-            { name: "油", max: 3 },
-            { name: "辣", max: 3 },
-            { name: "咸", max: 3 },
-            { name: "鲜", max: 3 },
-            { name: "麻", max: 3 },
+            { name: '酸', max: 3 },
+            { name: '甜', max: 3 },
+            { name: '油', max: 3 },
+            { name: '辣', max: 3 },
+            { name: '咸', max: 3 },
+            { name: '鲜', max: 3 },
+            { name: '麻', max: 3 }
           ],
           splitNumber: 3,
           nameGap: 6,
-          radius: "75%",
-          silent: true,
+          radius: '75%',
+          silent: true
         },
         series: [
           {
             // name: "预算 vs 开销（Budget vs spending）",
-            type: "radar",
+            type: 'radar',
             areaStyle: {
-              color: ["#a1d8b4"],
-              opacity: 0.5,
+              color: ['#a1d8b4'],
+              opacity: 0.5
             },
             data: [
               {
-                value: [],
+                value: []
                 // name: "预算分配（Allocated Budget）",
-              },
-            ],
-          },
-        ],
-      };
+              }
+            ]
+          }
+        ]
+      }
 
-      option && this.myChart.setOption(option);
+      option && this.myChart.setOption(option)
     },
-    setRadarCharts() {
-      let option;
+    setRadarCharts () {
+      let option
       option = {
         series: [
           {
             data: [
               {
-                value: this.flavorValue,
-              },
-            ],
-          },
-        ],
-      };
-      option && this.myChart.setOption(option);
+                value: this.flavorValue
+              }
+            ]
+          }
+        ]
+      }
+      option && this.myChart.setOption(option)
     },
-    DietClick(row) {
+    DietClick (row) {
       const str = JSON.stringify(row)
       sessionStorage.setItem('DietDetail', str)
       this.$router.push('DietDetail')
     }
   },
-  mounted() {
-    this.createRadarCharts();
-  },
-};
+  mounted () {
+    this.createRadarCharts()
+  }
+}
 </script>
 
 <style scoped>

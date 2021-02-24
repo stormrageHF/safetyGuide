@@ -10,26 +10,26 @@
 
 <script>
 export default {
-  name: "Concierge",
-  data() {
+  name: 'Concierge',
+  data () {
     return {
       imgArr: [
-        require("../../assets/images/concierge/button_Concierge01.jpg"),
-        require("../../assets/images/concierge/button_Concierge02.jpg"),
-      ],
-    };
+        require('../../assets/images/concierge/button_Concierge01.jpg'),
+        require('../../assets/images/concierge/button_Concierge02.jpg')
+      ]
+    }
   },
   methods: {
-    itemClick(t) {
+    itemClick (t) {
       this.$router.push({
-        name: "details",
+        name: 'details',
         params: {
-          id: "concierge" + t,
-        },
-      });
-    },
-  },
-};
+          id: 'concierge' + t
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

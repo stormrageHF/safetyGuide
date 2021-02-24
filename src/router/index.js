@@ -1,5 +1,5 @@
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from 'vue'
+import Router from 'vue-router'
 
 const Home = () => import('../pages/Home/Home.vue')
 const Destination = () => import('../pages/Destination/Destination.vue')
@@ -12,61 +12,58 @@ const ScenicDetail = () => import('../pages/ScenicDetail/ScenicDetail.vue')
 const HealthyDetail = () => import('../pages/HealthyDetail/HealthyDetail.vue')
 const DietDetail = () => import('../pages/DietDetail/DietDetail.vue')
 
-
-
-Vue.use(Router);
+Vue.use(Router)
 
 const router = new Router({
-    // mode: 'history',
-    routes: [
-        {
-            path: '/',
-            redirect: '/home'
-        },
-        {
-            path: '/home',
-            component: Home
-        },
-        {
-            path: '/des',
-            component: Destination
-        },
-        {
-            path: '/ass',
-            component: Assistance
-        },
-        {
-            path: '/med',
-            component: Medical
-        },{
-            path: '/consult',
-            component: Consulting
-        },{
-            path: '/concierge',
-            component: Concierge
-        },
-        {
-            path: '/details/:id',
-            name: 'details',
-            component: Details
-        },
-        {
-            path: '/ScenicDetail/:name',
-            name: 'ScenicDetail',
-            component: ScenicDetail,
-        },
-        {
-            path: '/HealthyDetail',
-            name: 'HealthyDetail',
-            component: HealthyDetail,
-        },
-        {
-            path: '/DietDetail',
-            name: 'DietDetail',
-            component: DietDetail
-        }
-    ]
+  // mode: 'history',
+  routes: [
+    {
+      path: '/',
+      redirect: '/home'
+    },
+    {
+      path: '/home',
+      component: Home
+    },
+    {
+      path: '/des',
+      component: Destination
+    },
+    {
+      path: '/ass',
+      component: Assistance
+    },
+    {
+      path: '/med',
+      component: Medical
+    }, {
+      path: '/consult',
+      component: Consulting
+    }, {
+      path: '/concierge',
+      component: Concierge
+    },
+    {
+      path: '/details/:id',
+      name: 'details',
+      component: Details
+    },
+    {
+      path: '/ScenicDetail/:name',
+      name: 'ScenicDetail',
+      component: ScenicDetail
+    },
+    {
+      path: '/HealthyDetail',
+      name: 'HealthyDetail',
+      component: HealthyDetail
+    },
+    {
+      path: '/DietDetail',
+      name: 'DietDetail',
+      component: DietDetail
+    }
+  ]
 })
 
-export default router;
-
+export default router

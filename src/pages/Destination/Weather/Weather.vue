@@ -100,7 +100,7 @@
           </el-col>
         </el-row>
       </div>
-      
+
       <!-- 衣服 -->
       <div class="clothes_box">
         <!-- 紫外线 -->
@@ -464,9 +464,9 @@
 // import { GetWeather } from '../../../api/index';
 
 export default {
-  name: "Weahter",
-  props: ["bs"],
-  data() {
+  name: 'Weahter',
+  props: ['bs'],
+  data () {
     return {
       weather: {},
       airQuality: {},
@@ -477,8 +477,8 @@ export default {
       co_standard: 15500, // co 超标
       pm10_standard: 255, // pm10 超标
       o3_standard: 350, // o3 超标
-      windLevel: 7, // 大风级别
-    };
+      windLevel: 7 // 大风级别
+    }
   },
   methods: {
     // 获取天气
@@ -493,50 +493,50 @@ export default {
     //   }
     // },
   },
-  mounted() {
+  mounted () {
     // this.GetWeatherAsync();
     // console.log('-------' + this.city);
-    console.log("weather -- mounted ~~");
+    console.log('weather -- mounted ~~')
     // if (this.bs.refresh) {
     //   this.bs.refresh();
     // }
   },
-  updated() {
-    console.log("weather -- updated ~~");
+  updated () {
+    console.log('weather -- updated ~~')
     // if (this.bs.refresh) {
     //   this.bs.refresh();
     // }
   },
   filters: {
-    weatherClothes(value) {
+    weatherClothes (value) {
       // console.log(value);
       if (value) {
         // value = value.slice(0, -1);
         if (value <= 15) {
-          return "羽绒服";
+          return '羽绒服'
         } else if (value > 15 && value < 25) {
-          return "外套";
+          return '外套'
         } else {
-          return "短袖";
+          return '短袖'
         }
       }
     },
-    weatherClothImg(value) {
+    weatherClothImg (value) {
       // console.log(value);
       if (value) {
         // const t = value.slice(0, -1);
-        const t = value;
+        const t = value
         if (t <= 15) {
-          return require("../../../assets/liveTips/icon_downcoat.svg");
+          return require('../../../assets/liveTips/icon_downcoat.svg')
         } else if (t > 15 && t < 25) {
-          return require("../../../assets/liveTips/icon_coat.svg");
+          return require('../../../assets/liveTips/icon_coat.svg')
         } else {
-          return require("../../../assets/liveTips/icon_Tshirt.svg");
+          return require('../../../assets/liveTips/icon_Tshirt.svg')
         }
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>

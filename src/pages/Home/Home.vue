@@ -47,25 +47,25 @@
 
 <script>
 export default {
-  name: "Home",
+  name: 'Home',
   methods: {
-    destinationClick() {
-      this.$router.push({ path: "/des" });
+    destinationClick () {
+      this.$router.push({ path: '/des' })
     },
-    assistanceClick() {
-      this.$router.push({ path: "/ass" });
+    assistanceClick () {
+      this.$router.push({ path: '/ass' })
     },
-    medClick() {
-      this.$router.push({ path: "/med" });
+    medClick () {
+      this.$router.push({ path: '/med' })
     },
-    consultClick() {
-      this.$router.push({ path: "/consult" });
+    consultClick () {
+      this.$router.push({ path: '/consult' })
     },
-    conciergeClick() {
-      this.$router.push({ path: "/concierge" });
-    },
-  },
-};
+    conciergeClick () {
+      this.$router.push({ path: '/concierge' })
+    }
+  }
+}
 </script>
 
 <style scoped>

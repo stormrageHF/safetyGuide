@@ -23,21 +23,21 @@
 <script>
 
 export default {
-  name: "Scenic",
-  data() {
+  name: 'Scenic',
+  data () {
     return {
-      scenicList: [],
-    };
+      scenicList: []
+    }
   },
   methods: {
-    scenicClick(item) {
-      this.$router.push({ name: "ScenicDetail", params: { name: item.Name } });
-      localStorage.scenicId = item.Id; // 景点id
-    },
+    scenicClick (item) {
+      this.$router.push({ name: 'ScenicDetail', params: { name: item.Name } })
+      localStorage.scenicId = item.Id // 景点id
+    }
   },
-  mounted() {
-  },
-};
+  mounted () {
+  }
+}
 </script>
 
 <style scoped>
@@ -76,8 +76,8 @@ export default {
   word-break: break-all;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;  
-  -webkit-box-orient: vertical;  
-  overflow: hidden; 
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>

@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import Contagion from "./Contagion/Contagion";
+import Contagion from './Contagion/Contagion'
 import {
   GetCityFileLink,
   GetWeather,
@@ -69,221 +69,221 @@ import {
   GetScenicInfo,
   GetDietInfo,
   GetDisease,
-  GetClimate,
-} from "../../api/index";
+  GetClimate
+} from '../../api/index'
 // import { lazyAMapApiLoaderInstance } from "vue-amap";
-import { provinceAndCityData, CodeToText } from "element-china-area-data";
-import AMap from "AMap"; // 引入高德地图
+import { provinceAndCityData, CodeToText } from 'element-china-area-data'
+import AMap from 'AMap' // 引入高德地图
 // import areaList from "../../../static/area";
-import Weather from "./Weather/Weather";
-import Scenic from "./Scenic/Scenic";
-import BScroll from "@better-scroll/core";
-import Diet from './Diet/Diet';
-import Healthy from './Healthy/Healthy';
+import Weather from './Weather/Weather'
+import Scenic from './Scenic/Scenic'
+import BScroll from '@better-scroll/core'
+import Diet from './Diet/Diet'
+import Healthy from './Healthy/Healthy'
 
 export default {
-  name: "Destination",
-  data() {
+  name: 'Destination',
+  data () {
     return {
       activeName: 'first',
-      cityName: "",
+      cityName: '',
       cityInfo: {},
       options: provinceAndCityData,
       CodeToText,
       selectedOptions: [],
-      cityLink: "",
+      cityLink: '',
       show: false, // 控制城市列表弹出,
       areaList: {
         province_list: {},
-        city_list: {},
+        city_list: {}
       },
       weather: {},
       bs: {}, // 滚动实例
-      scenicList: [], // 景点信息 
-      dietInfo: null, // 饮食信息
-    };
+      scenicList: [], // 景点信息
+      dietInfo: null // 饮食信息
+    }
   },
   methods: {
     // 获取省市
-    async GetProvinceAndCityAsync() {
-      const that = this;
-      const r = await GetProvinceAndCity();
+    async GetProvinceAndCityAsync () {
+      const that = this
+      const r = await GetProvinceAndCity()
       if (r.code === 1) {
-        const areaDatas = r.data;
+        const areaDatas = r.data
         // 处理省
         areaDatas.provinces.forEach((province) => {
-          that.areaList.province_list[province.adcode] = province.Name;
-        });
+          that.areaList.province_list[province.adcode] = province.Name
+        })
         // 处理市
         areaDatas.citys.forEach((city) => {
-          that.areaList.city_list[city.adcode] = city.Name;
-        });
+          that.areaList.city_list[city.adcode] = city.Name
+        })
         // console.log(that.areaList);
       }
     },
     // 获取饮食
-    async GetDietInfoAsync(){
-      const that = this;
+    async GetDietInfoAsync () {
+      const that = this
       const r = await GetDietInfo({
-       city: that.cityName,
+        city: that.cityName
       })
-      if(r.code === 1){
-        that.dietInfo = r.data;
-        that.$refs.DietMap.setData(that.dietInfo);
+      if (r.code === 1) {
+        that.dietInfo = r.data
+        that.$refs.DietMap.setData(that.dietInfo)
       }
     },
     // 获取景点信息
-    async GetScenicInfoAsync(){
-      const that = this;
+    async GetScenicInfoAsync () {
+      const that = this
       const r = await GetScenicInfo({
-       city: that.cityName,
+        city: that.cityName
       })
-      if(r.code === 1){
-        that.scenicList = r.data;
-        that.$refs.ScenicMap.scenicList = that.scenicList;
+      if (r.code === 1) {
+        that.scenicList = r.data
+        that.$refs.ScenicMap.scenicList = that.scenicList
       }
     },
     // 获取天气
-    async GetWeatherAsync() {
-      const that = this;
+    async GetWeatherAsync () {
+      const that = this
       const r = await GetWeather({
-        city: that.cityName,
-      });
+        city: that.cityName
+      })
       if (r.code === 1) {
-        that.weather = r.data.wether;
+        that.weather = r.data.wether
         // console.log(r.data);
-        that.$refs.WeatherMap.weather = that.weather;
-        that.$refs.WeatherMap.airQuality = r.data.airQuality;
-        that.$refs.WeatherMap.IsAirQuality = r.data.IsAirQuality;
+        that.$refs.WeatherMap.weather = that.weather
+        that.$refs.WeatherMap.airQuality = r.data.airQuality
+        that.$refs.WeatherMap.IsAirQuality = r.data.IsAirQuality
       }
     },
     // 获取传染病
-    async GetDiseaseAsync(){
-      const that = this;
+    async GetDiseaseAsync () {
+      const that = this
       const r = await GetDisease({
-        city: that.cityName,
-      });
+        city: that.cityName
+      })
       if (r.code === 1) {
         that.$refs.HealthyMap.setData(r.data)
       }
     },
     // 获取气候
-    async GetClimateAsync(){
-      const that = this;
+    async GetClimateAsync () {
+      const that = this
       const r = await GetClimate({
-        city: that.cityName,
-      });
+        city: that.cityName
+      })
       if (r.code === 1) {
         that.$refs.HealthyMap.setClimate(r.data)
       }
     },
     // 得到所在城市
-    getCity(cityName) {
+    getCity (cityName) {
       // this.cityInfo = info;
       // this.cityName = info.city === "" ? info.province : info.city;
-      this.cityName = cityName;
+      this.cityName = cityName
       // 获取城市链接
-      this.GetCityFileLinkAsync();
+      this.GetCityFileLinkAsync()
       // 获取天气
-      this.GetWeatherAsync();
+      this.GetWeatherAsync()
       // 获取景点
-      this.GetScenicInfoAsync();
+      this.GetScenicInfoAsync()
       // 获取饮食
       this.GetDietInfoAsync()
       // 获取传染病
-      this.GetDiseaseAsync();
+      this.GetDiseaseAsync()
       // 获取气候
-      this.GetClimateAsync();
+      this.GetClimateAsync()
     },
     // 获取城市链接
-    async GetCityFileLinkAsync() {
-      const that = this;
+    async GetCityFileLinkAsync () {
+      const that = this
       const r = await GetCityFileLink({
-        city: that.cityName,
-      });
+        city: that.cityName
+      })
       if (r.code === 1) {
         // console.log(r.data);
-        that.cityLink = r.data.Link;
+        that.cityLink = r.data.Link
       }
     },
-    handleClick(tab) {
-      console.log(tab);
-      this.activeName = tab.name;
-      sessionStorage.activeName = this.activeName; // 更换tab，记录激活 tab 状态
+    handleClick (tab) {
+      console.log(tab)
+      this.activeName = tab.name
+      sessionStorage.activeName = this.activeName // 更换tab，记录激活 tab 状态
       // this.refreshBs();
     },
-    //获取用户所在城市信息
-    showCityInfo() {
-      const that = this;
-      //实例化城市查询类
-      const citysearch = new AMap.CitySearch();
-      //自动获取用户IP，返回当前城市
+    // 获取用户所在城市信息
+    showCityInfo () {
+      const that = this
+      // 实例化城市查询类
+      const citysearch = new AMap.CitySearch()
+      // 自动获取用户IP，返回当前城市
       citysearch.getLocalCity(function (status, result) {
-        if (status === "complete" && result.info === "OK") {
+        if (status === 'complete' && result.info === 'OK') {
           if (result && result.city && result.bounds) {
-            that.cityName = result.city;
+            that.cityName = result.city
             // that.cityInfo = result;
             // console.log(result);
             // that.$refs.contagionMap.cityInfo = result;
             // console.log(that.$refs.contagionMap.cityInfo);
             // 获取城市链接
-            that.GetCityFileLinkAsync();
+            that.GetCityFileLinkAsync()
           }
         } else {
-          console.log(result.info);
+          console.log(result.info)
         }
-      });
+      })
     },
-    handleChange(value) {
-      console.log(value);
-      console.log(this.selectedOptions);
+    handleChange (value) {
+      console.log(value)
+      console.log(this.selectedOptions)
       // this.ruleForm.Provice = this.CodeToText[value[0]];
       // this.ruleForm.City = this.CodeToText[value[1]];
       // this.ruleForm.Region = this.CodeToText[value[2]];
     },
-    switchCity() {
-      this.show = true;
+    switchCity () {
+      this.show = true
     },
-    confirmCity(city) {
-      console.log(city);
-      this.show = false;
-      this.cityName = city[1].name;
+    confirmCity (city) {
+      console.log(city)
+      this.show = false
+      this.cityName = city[1].name
       // 村本地
-      sessionStorage.cityName = this.cityName;
+      sessionStorage.cityName = this.cityName
       // 获取城市链接
-      this.GetCityFileLinkAsync();
+      this.GetCityFileLinkAsync()
       // 获取天气
-      this.GetWeatherAsync();
+      this.GetWeatherAsync()
       // 改变地图
-      this.$refs.contagionMap.cityName = this.cityName;
-      this.$refs.contagionMap.county = "";
-      this.$refs.contagionMap.getDatas();
+      this.$refs.contagionMap.cityName = this.cityName
+      this.$refs.contagionMap.county = ''
+      this.$refs.contagionMap.getDatas()
       // 景点
-      this.GetScenicInfoAsync();
+      this.GetScenicInfoAsync()
       // 饮食
-      this.GetDietInfoAsync();
+      this.GetDietInfoAsync()
       // 获取传染病
-      this.GetDiseaseAsync();
+      this.GetDiseaseAsync()
       // 获取气候
-      this.GetClimateAsync();
+      this.GetClimateAsync()
     },
-    cancelCity(){
-      this.show = false;
+    cancelCity () {
+      this.show = false
     },
-    setBetterScroll() {
-      const that = this;
-      let wrapper = document.querySelector("#wrapper");
+    setBetterScroll () {
+      const that = this
+      const wrapper = document.querySelector('#wrapper')
       if (wrapper) {
         that.bs = new BScroll(wrapper, {
           // specifiedIndexAsContent: 1,
           scrollY: true,
-          click: true,
-        });
+          click: true
+        })
       }
     },
-    refreshBs(){
+    refreshBs () {
       // 重新计算 BetterScroll，当 DOM 结构发生变化的时候务必要调用确保滚动的效果正常
-      if(this.bs.refresh){
+      if (this.bs.refresh) {
         this.bs.refresh()
       }
     }
@@ -293,63 +293,63 @@ export default {
     Weather,
     Scenic,
     Diet,
-    Healthy,
+    Healthy
   },
-  created() {
+  created () {
     // 获取省市
-    this.GetProvinceAndCityAsync();
-    console.log("destination ~~~~");
+    this.GetProvinceAndCityAsync()
+    console.log('destination ~~~~')
   },
   filters: {
     // 天气icon
-    formatWeatherImg(value) {
+    formatWeatherImg (value) {
       if (!value) {
-        return "";
+        return ''
       }
-      let img = "";
+      let img = ''
       switch (value) {
-        case "qing.png":
-          img = require("../../assets/cusWeather/icon_weather_fine.svg");
-          break;
-        case "bingbao.png":
-          img = require("../../assets/cusWeather/icon_weather_hail.svg");
-          break;
-        case "lei.png":
-          img = require("../../assets/cusWeather/icon_weather_thunder.svg");
-          break;
-        case "shachen.png":
-          img = require("../../assets/cusWeather/icon_weather_sand.svg");
-          break;
-        case "wu.png":
-          img = require("../../assets/cusWeather/icon_weather_fog.svg");
-          break;
-        case "xue.png":
-          img = require("../../assets/cusWeather/icon_weather_snow.svg");
-          break;
-        case "yin.png":
-          img = require("../../assets/cusWeather/icon_weather_overcast.svg");
-          break;
-        case "yu.png":
-          img = require("../../assets/cusWeather/icon_weather_rain.svg");
-          break;
-        case "yun.png":
-          img = require("../../assets/cusWeather/icon_weather_cloudy.svg");
-          break;
+        case 'qing.png':
+          img = require('../../assets/cusWeather/icon_weather_fine.svg')
+          break
+        case 'bingbao.png':
+          img = require('../../assets/cusWeather/icon_weather_hail.svg')
+          break
+        case 'lei.png':
+          img = require('../../assets/cusWeather/icon_weather_thunder.svg')
+          break
+        case 'shachen.png':
+          img = require('../../assets/cusWeather/icon_weather_sand.svg')
+          break
+        case 'wu.png':
+          img = require('../../assets/cusWeather/icon_weather_fog.svg')
+          break
+        case 'xue.png':
+          img = require('../../assets/cusWeather/icon_weather_snow.svg')
+          break
+        case 'yin.png':
+          img = require('../../assets/cusWeather/icon_weather_overcast.svg')
+          break
+        case 'yu.png':
+          img = require('../../assets/cusWeather/icon_weather_rain.svg')
+          break
+        case 'yun.png':
+          img = require('../../assets/cusWeather/icon_weather_cloudy.svg')
+          break
         default:
-          break;
+          break
       }
-      return img;
-    },
+      return img
+    }
   },
-  mounted() {
+  mounted () {
     // this.setBetterScroll();
-    this.activeName = sessionStorage.activeName || 'first';
+    this.activeName = sessionStorage.activeName || 'first'
   },
-  updated(){
-    console.log('detination -- updated ~~');
+  updated () {
+    console.log('detination -- updated ~~')
     this.refreshBs()
   }
-};
+}
 </script>
 
 <style scoped>

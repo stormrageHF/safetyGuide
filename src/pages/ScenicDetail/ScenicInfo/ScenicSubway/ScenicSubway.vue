@@ -7,7 +7,7 @@
         v-for="(subWay, index) in SubWayDatas"
         :key="subWay.Id"
       >
-        <div class="content_item" 
+        <div class="content_item"
         @click="clickSubway(subWay, index + 1)"
         :class="{ actived: subWay.isSelected }">
           <div>
@@ -38,45 +38,45 @@
 
 <script>
 export default {
-  name: "ScenicSubway",
-  data() {
+  name: 'ScenicSubway',
+  data () {
     return {
       CurrentPage: 1,
       SubWayDatas: [],
       totalNum: 100,
       pageSize: 5,
-      TotalPage: 1,
-    };
+      TotalPage: 1
+    }
   },
   methods: {
-    setSubway(data) {
+    setSubway (data) {
       if (!data) {
-        return;
+        return
       }
-      this.SubWayDatas = data.DataList;
-      this.CurrentPage = data.CurrentPage;
-      this.totalNum = data.totalNum;
-      this.TotalPage = data.TotalPage;
+      this.SubWayDatas = data.DataList
+      this.CurrentPage = data.CurrentPage
+      this.totalNum = data.totalNum
+      this.TotalPage = data.TotalPage
     },
-    pageChange(page) {
-      this.$emit("page-change", page);
+    pageChange (page) {
+      this.$emit('page-change', page)
     },
-    clickSubway(subWay, index) {
-      this.$emit("click-subway", { subWay, index });
+    clickSubway (subWay, index) {
+      this.$emit('click-subway', { subWay, index })
       // this.setUnSelected();
-      subWay.isSelected = true;
-      this.$forceUpdate();
+      subWay.isSelected = true
+      this.$forceUpdate()
     },
     // 设置全部未选中
-    setUnSelected() {
+    setUnSelected () {
       if (this.SubWayDatas) {
         this.SubWayDatas.forEach((item) => {
-         item.isSelected = false;
-        });
+          item.isSelected = false
+        })
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -84,7 +84,7 @@ export default {
   margin-top: 10px;
 }
 .traffic_content > div:nth-child(1) {
-  padding-top: 5px;
+  /* padding-top: 5px; */
   font-size: 12px;
   color: #4d4d4d;
   letter-spacing: 0.75px;
@@ -93,7 +93,7 @@ export default {
   margin-bottom: 20px;
 }
 .content_item {
-  min-height: 35px;
+  min-height: 20px;
   display: flex;
   align-items: center;
 }

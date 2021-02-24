@@ -41,33 +41,33 @@
 
 <script>
 export default {
-  name: "ScenicAround",
-  data() {
+  name: 'ScenicAround',
+  data () {
     return {
-      MedicalDatas: {},
-    };
+      MedicalDatas: {}
+    }
   },
   methods: {
     // 点击医疗机构
-    medicalClick(medical, index) {
-      this.setUnSelected();
-      medical.selected = true;
-      this.$forceUpdate();
-      this.$emit("select-medical", { medical, index });
+    medicalClick (medical, index) {
+      this.setUnSelected()
+      medical.selected = true
+      this.$forceUpdate()
+      this.$emit('select-medical', { medical, index })
     },
     // 设置全部未选中
-    setUnSelected() {
+    setUnSelected () {
       if (this.MedicalDatas) {
         this.MedicalDatas.forEach((medical) => {
           medical.datas.forEach(med => {
-            med.selected = false;
+            med.selected = false
           })
-        });
+        })
       }
-    },
+    }
   },
-  mounted() {},
-};
+  mounted () {}
+}
 </script>
 
 <style scoped>

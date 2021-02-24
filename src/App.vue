@@ -6,12 +6,12 @@
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
   components: {},
-  mounted() {
-    document.title = "安行指南";
-  },
-};
+  mounted () {
+    document.title = '安行指南'
+  }
+}
 </script>
 
 <style>

@@ -16,33 +16,33 @@
 
 <script>
 export default {
-  name: "Assistance",
-  data() {
+  name: 'Assistance',
+  data () {
     return {
       imgArr: [
-        require("../../assets/images/assistance/button_Assistance01.jpg"),
-        require("../../assets/images/assistance/button_Assistance02.jpg"),
-        require("../../assets/images/assistance/button_Assistance03.jpg"),
-        require("../../assets/images/assistance/button_Assistance04.jpg"),
-        require("../../assets/images/assistance/button_Assistance05.jpg"),
-        require("../../assets/images/assistance/button_Assistance06.jpg"),
-        require("../../assets/images/assistance/button_Assistance07.jpg"),
-        require("../../assets/images/assistance/button_Assistance08.jpg"),
-        require("../../assets/images/assistance/button_Assistance09.jpg"),
-      ],
-    };
+        require('../../assets/images/assistance/button_Assistance01.jpg'),
+        require('../../assets/images/assistance/button_Assistance02.jpg'),
+        require('../../assets/images/assistance/button_Assistance03.jpg'),
+        require('../../assets/images/assistance/button_Assistance04.jpg'),
+        require('../../assets/images/assistance/button_Assistance05.jpg'),
+        require('../../assets/images/assistance/button_Assistance06.jpg'),
+        require('../../assets/images/assistance/button_Assistance07.jpg'),
+        require('../../assets/images/assistance/button_Assistance08.jpg'),
+        require('../../assets/images/assistance/button_Assistance09.jpg')
+      ]
+    }
   },
-  methods:{
-    itemClick(t){
+  methods: {
+    itemClick (t) {
       this.$router.push({
         name: 'details',
         params: {
-          id: 'ass'+t
+          id: 'ass' + t
         }
       })
     }
   }
-};
+}
 </script>
 
 <style scoped>

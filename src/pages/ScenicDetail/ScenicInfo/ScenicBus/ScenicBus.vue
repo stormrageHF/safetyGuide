@@ -3,8 +3,8 @@
     <!-- 公交信息 -->
     <div class="content_box">
       <div class="traffic_content" v-for="(bus, index) in BusDatas" :key="bus.Id">
-        <div class="content_item" 
-        @click="clickBus(bus,(index+1))" 
+        <div class="content_item"
+        @click="clickBus(bus,(index+1))"
         :class="{ actived: bus.isSelected }">
          <div>
             <span>{{ (index+1) + '.' + bus.Name }}</span>
@@ -34,45 +34,45 @@
 
 <script>
 export default {
-  name: "ScenicBus",
-  data() {
+  name: 'ScenicBus',
+  data () {
     return {
       CurrentPage: 1,
       BusDatas: [],
       totalNum: 100,
       pageSize: 5,
-      TotalPage: 1,
-    };
+      TotalPage: 1
+    }
   },
   methods: {
-    setBus(data) {
+    setBus (data) {
       if (!data) {
-        return;
+        return
       }
-      this.BusDatas = data.DataList;
-      this.CurrentPage = data.CurrentPage;
-      this.totalNum = data.totalNum;
-      this.TotalPage = data.TotalPage;
+      this.BusDatas = data.DataList
+      this.CurrentPage = data.CurrentPage
+      this.totalNum = data.totalNum
+      this.TotalPage = data.TotalPage
     },
-    pageChange(page){
-      this.$emit('page-change', page);
+    pageChange (page) {
+      this.$emit('page-change', page)
     },
-    clickBus(bus, index){
-      this.$emit('click-bus', { bus, index });
+    clickBus (bus, index) {
+      this.$emit('click-bus', { bus, index })
       // this.setUnSelected();
-      bus.isSelected = true;
-      this.$forceUpdate();
+      bus.isSelected = true
+      this.$forceUpdate()
     },
     // 设置全部未选中
-    setUnSelected() {
+    setUnSelected () {
       if (this.BusDatas) {
         this.BusDatas.forEach((item) => {
-         item.isSelected = false;
-        });
+          item.isSelected = false
+        })
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -80,7 +80,7 @@ export default {
   margin-top: 10px;
 }
 .traffic_content > div:nth-child(1) {
-  padding-top: 5px;
+  /* padding-top: 5px; */
   font-size: 12px;
   color: #4d4d4d;
   letter-spacing: 0.75px;
@@ -89,7 +89,7 @@ export default {
   margin-bottom: 20px;
 }
 .content_item {
-  min-height: 35px;
+  min-height: 20px;
   display: flex;
   align-items: center;
 }

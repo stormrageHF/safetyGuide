@@ -29,29 +29,29 @@
 
 <script>
 export default {
-  name: "DietDetail",
-  data() {
+  name: 'DietDetail',
+  data () {
     return {
       DietDetail: {
-        Img: "",
-        Name: "",
-        Describe: "",
-      },
-    };
+        Img: '',
+        Name: '',
+        Describe: ''
+      }
+    }
   },
-  mounted() {
-    const str = sessionStorage.getItem("DietDetail") || "";
-    const data = JSON.parse(str);
-    this.DietDetail.Img = data.Img;
-    this.DietDetail.Describe = data.Describe;
-    this.DietDetail.Name = data.Name;
+  mounted () {
+    const str = sessionStorage.getItem('DietDetail') || ''
+    const data = JSON.parse(str)
+    this.DietDetail.Img = data.Img
+    this.DietDetail.Describe = data.Describe
+    this.DietDetail.Name = data.Name
   },
-  methods:{
-    onClickLeft(){
+  methods: {
+    onClickLeft () {
       this.$router.go(-1)
     }
   }
-};
+}
 </script>
 
 <style scoped>

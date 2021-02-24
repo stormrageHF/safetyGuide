@@ -66,64 +66,64 @@
 
 <script>
 export default {
-  name: "Healthy",
-  data() {
+  name: 'Healthy',
+  data () {
     return {
       InfectiousData: [],
-      Img: "",
-      Descript: "",
+      Img: '',
+      Descript: '',
       Content: [],
       FoodStructrue: [
         {
-          name: "当地膳食结构特点",
+          name: '当地膳食结构特点',
           text:
-            "",
+            ''
         },
         {
-          name: "膳食结构缺陷",
+          name: '膳食结构缺陷',
           text:
-            "",
+            ''
         },
         {
-          name: "营养建议",
+          name: '营养建议',
           text:
-            "",
-        },
+            ''
+        }
       ],
-      JKZXName: "",
-      JKZXPhone: "",
-    };
+      JKZXName: '',
+      JKZXPhone: ''
+    }
   },
   methods: {
-    setData(data) {
-      this.InfectiousData = data.DiseaseDtos;
-      this.JKZXName = data.JKZXName;
-      this.JKZXPhone = data.JKZXPhone;
+    setData (data) {
+      this.InfectiousData = data.DiseaseDtos
+      this.JKZXName = data.JKZXName
+      this.JKZXPhone = data.JKZXPhone
       // DietJGTD  DietJGQX  DietYYJY
-      this.FoodStructrue[0].text = data.DietJGTD;
-      this.FoodStructrue[1].text = data.DietJGQX;
-      this.FoodStructrue[2].text = data.DietYYJY;
+      this.FoodStructrue[0].text = data.DietJGTD
+      this.FoodStructrue[1].text = data.DietJGQX
+      this.FoodStructrue[2].text = data.DietYYJY
     },
-    setClimate(data) {
-      this.climateData = data;
-      this.Img = this.climateData.Img;
-      this.Descript = this.climateData.Descript;
-      this.Content = this.climateData.Content;
+    setClimate (data) {
+      this.climateData = data
+      this.Img = this.climateData.Img
+      this.Descript = this.climateData.Descript
+      this.Content = this.climateData.Content
     },
-    climateClick(row) {
+    climateClick (row) {
       // console.log(row);
-      const str = JSON.stringify(row);
-      sessionStorage.setItem("HealthyDetail", str);
-      this.$router.push("HealthyDetail");
+      const str = JSON.stringify(row)
+      sessionStorage.setItem('HealthyDetail', str)
+      this.$router.push('HealthyDetail')
     },
-    InfectiousClick(row) {
+    InfectiousClick (row) {
       // console.log(row);
-      const str = JSON.stringify(row);
-      sessionStorage.setItem("HealthyDetail", str);
-      this.$router.push("HealthyDetail");
-    },
-  },
-};
+      const str = JSON.stringify(row)
+      sessionStorage.setItem('HealthyDetail', str)
+      this.$router.push('HealthyDetail')
+    }
+  }
+}
 </script>
 
 <style scoped>

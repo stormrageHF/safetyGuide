@@ -63,37 +63,37 @@
 
 <script>
 export default {
-  name: "HealthyDetail",
-  data() {
+  name: 'HealthyDetail',
+  data () {
     return {
       active: 0,
       HealthyDetail: {
-        Img: "",
-        Name: "",
-        Treat: "",
-        Descript: "",
-      },
-    };
+        Img: '',
+        Name: '',
+        Treat: '',
+        Descript: ''
+      }
+    }
   },
-  mounted() {
-    const str = sessionStorage.getItem("HealthyDetail") || "";
-    const data = JSON.parse(str);
-    this.HealthyDetail.Img = data.Img;
-    this.HealthyDetail.Treat = data.Treat;
-    this.HealthyDetail.Descript = data.Descript;
-    this.HealthyDetail.Name = data.Name || data.Problem;
+  mounted () {
+    const str = sessionStorage.getItem('HealthyDetail') || ''
+    const data = JSON.parse(str)
+    this.HealthyDetail.Img = data.Img
+    this.HealthyDetail.Treat = data.Treat
+    this.HealthyDetail.Descript = data.Descript
+    this.HealthyDetail.Name = data.Name || data.Problem
   },
   filters: {
-    Format(value) {
-      return value.replaceAll("。", "。<br/>");
-    },
+    Format (value) {
+      return value.replaceAll('。', '。<br/>')
+    }
   },
   methods: {
-    onClickLeft() {
-      this.$router.go(-1);
-    },
-  },
-};
+    onClickLeft () {
+      this.$router.go(-1)
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -157,5 +157,9 @@ export default {
   position: absolute;
   top: -14px;
   left: -1px;
+}
+.van-tabs__content {
+  height: auto;
+  overflow-y: auto;
 }
 </style>

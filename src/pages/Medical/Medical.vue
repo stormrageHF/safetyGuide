@@ -16,28 +16,28 @@
 
 <script>
 export default {
-  name: "Medical",
-  data() {
+  name: 'Medical',
+  data () {
     return {
       imgArr: [
-        require("../../assets/images/medical/button_Medical01.jpg"),
-        require("../../assets/images/medical/button_Medical02.jpg"),
-        require("../../assets/images/medical/button_Medical03.jpg"),
-        require("../../assets/images/medical/button_Medical04.jpg"),
-      ],
-    };
+        require('../../assets/images/medical/button_Medical01.jpg'),
+        require('../../assets/images/medical/button_Medical02.jpg'),
+        require('../../assets/images/medical/button_Medical03.jpg'),
+        require('../../assets/images/medical/button_Medical04.jpg')
+      ]
+    }
   },
-  methods:{
-    itemClick(t){
+  methods: {
+    itemClick (t) {
       this.$router.push({
         name: 'details',
         params: {
-          id: 'med'+t
+          id: 'med' + t
         }
       })
     }
   }
-};
+}
 </script>
 
 <style scoped>
