@@ -22,7 +22,10 @@
       </div>
       <div class="traffic_box">
         <div class="traffic_item">
-          <div class="traffic_title">公交车</div>
+          <div class="traffic_title">
+            <img src="@/assets/scenic/icon_bus.svg" alt="" />
+            <span>公交车</span>
+          </div>
           <ScenicBus
             ref="ScenicBus"
             @page-change="getBusByPage"
@@ -30,7 +33,10 @@
           ></ScenicBus>
         </div>
         <div class="traffic_item">
-          <div class="traffic_title">停车场</div>
+          <div class="traffic_title">
+            <img src="@/assets/scenic/icon_parking.svg" alt="" />
+            <span>停车场</span>
+          </div>
           <ScenicPark
             ref="ScenicPark"
             @page-change="getParkByPage"
@@ -38,7 +44,10 @@
           ></ScenicPark>
         </div>
         <div class="traffic_item">
-          <div class="traffic_title">地铁</div>
+          <div class="traffic_title">
+            <img src="@/assets/scenic/icon_metro.svg" alt="" />
+            <span>地铁</span>
+          </div>
           <ScenicSubway
             ref="ScenicSubway"
             @page-change="getSubwayByPage"
@@ -67,97 +76,97 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
-import ScenicBus from './ScenicBus/ScenicBus'
-import ScenicPark from './ScenicPark/ScenicPark'
-import ScenicSubway from './ScenicSubway/ScenicSubway'
+import * as echarts from "echarts";
+import ScenicBus from "./ScenicBus/ScenicBus";
+import ScenicPark from "./ScenicPark/ScenicPark";
+import ScenicSubway from "./ScenicSubway/ScenicSubway";
 
 export default {
-  name: 'ScenicInfo',
-  data () {
+  name: "ScenicInfo",
+  data() {
     return {
       sourceData: {},
       Risk: [],
-      unsuitImg: require('../../../assets/fitpeople/icon_age_all.svg'),
+      unsuitImg: require("../../../assets/fitpeople/icon_age_all.svg"),
       myChart: null,
       PageIndex: 1,
       BusDatas: [],
-      peakValue: '历史平均峰值'
-    }
+      peakValue: "历史平均峰值",
+    };
   },
   filters: {
-    openTimeHandler (value) {
-      if (value && typeof value === 'string') {
-        return value.replaceAll('；', '；')
+    openTimeHandler(value) {
+      if (value && typeof value === "string") {
+        return value.replaceAll("；", "；");
       } else {
-        return ''
+        return "";
       }
-    }
+    },
   },
   methods: {
-    setScenicInfo (data) {
+    setScenicInfo(data) {
       if (data) {
-        this.sourceData = data
-        this.setEcharts(data.FlowData, data.AvgFlowData)
-        this.setFits(data.UnsuitPeople)
-        this.setRisks(data.Risk)
+        this.sourceData = data;
+        this.setEcharts(data.FlowData, data.AvgFlowData);
+        this.setFits(data.UnsuitPeople);
+        this.setRisks(data.Risk);
       }
     },
     // 创建拥挤度
-    createEcharts () {
-      this.myChart = echarts.init(document.getElementById('crowding'))
+    createEcharts() {
+      this.myChart = echarts.init(document.getElementById("crowding"));
 
       // 指定图表的配置项和数据
       const option = {
         title: {
-          text: ''
+          text: "",
         },
         tooltip: {},
         legend: {
-          data: ['销量']
+          data: ["销量"],
         },
         xAxis: {
-          type: 'category',
+          type: "category",
           boundaryGap: false,
           data: [
-            '0时',
-            '1时',
-            '2时',
-            '3时',
-            '4时',
-            '5时',
-            '6时',
-            '7时',
-            '8时',
-            '9时',
-            '10时',
-            '11时',
-            '12时',
-            '13时',
-            '14时',
-            '15时',
-            '16时',
-            '17时',
-            '18时',
-            '19时',
-            '20时',
-            '21时',
-            '22时',
-            '23时',
-            '24时'
-          ]
+            "0时",
+            "1时",
+            "2时",
+            "3时",
+            "4时",
+            "5时",
+            "6时",
+            "7时",
+            "8时",
+            "9时",
+            "10时",
+            "11时",
+            "12时",
+            "13时",
+            "14时",
+            "15时",
+            "16时",
+            "17时",
+            "18时",
+            "19时",
+            "20时",
+            "21时",
+            "22时",
+            "23时",
+            "24时",
+          ],
         },
         yAxis: {
-          type: 'value',
+          type: "value",
           // boundaryGap: [0, "50%"],
           show: false,
-          max: 100 // 'dataMax'
+          max: 100, // 'dataMax'
         },
         series: [
           {
-            name: '拥挤度',
-            type: 'line',
-            symbol: 'none',
+            name: "拥挤度",
+            type: "line",
+            symbol: "none",
             data: [],
             smooth: true,
             // markLine: {
@@ -172,7 +181,7 @@ export default {
             // },
             areaStyle: {
               color: {
-                type: 'linear',
+                type: "linear",
                 x: 0,
                 y: 0,
                 x2: 0,
@@ -180,142 +189,142 @@ export default {
                 colorStops: [
                   {
                     offset: 0,
-                    color: 'red' // 0% 处的颜色
+                    color: "red", // 0% 处的颜色
                   },
                   {
                     offset: 1,
-                    color: 'blue' // 100% 处的颜色
-                  }
+                    color: "blue", // 100% 处的颜色
+                  },
                 ],
-                global: false // 缺省为 false
-              }
+                global: false, // 缺省为 false
+              },
             },
             lineStyle: {
-              opacity: 0
-            }
-          }
+              opacity: 0,
+            },
+          },
         ],
         graphic: {
           elements: [
             {
-              type: 'text',
+              type: "text",
               z: 100,
-              right: '10%',
-              top: '0%',
+              right: "10%",
+              top: "0%",
               style: {
-                fill: '#333', // #333
-                text: ['绿色曲线:历史平均峰值'].join('\n'),
-                font: '10px Microsoft YaHei'
-              }
-            }
-          ]
-        }
-      }
+                fill: "#333", // #333
+                text: ["绿色曲线:历史平均峰值"].join("\n"),
+                font: "10px Microsoft YaHei",
+              },
+            },
+          ],
+        },
+      };
 
-      option && this.myChart.setOption(option)
+      option && this.myChart.setOption(option);
     },
-    setEcharts (data, AvgFlowData) {
+    setEcharts(data, AvgFlowData) {
       if (Array.isArray(data)) {
-        data.unshift(0, 0, 0, 0, 0, 0)
-        data.push(0, 0, 0)
+        data.unshift(0, 0, 0, 0, 0, 0);
+        data.push(0, 0, 0);
       }
       if (Array.isArray(AvgFlowData)) {
-        AvgFlowData.unshift(0, 0, 0, 0, 0, 0)
-        AvgFlowData.push(0, 0, 0)
+        AvgFlowData.unshift(0, 0, 0, 0, 0, 0);
+        AvgFlowData.push(0, 0, 0);
       }
       const option = {
         series: [
           {
-            data: data
+            data: data,
           },
           {
-            name: '历史峰值',
-            type: 'line',
+            name: "历史峰值",
+            type: "line",
             lineStyle: {
-              color: 'green',
-              width: 1
+              color: "green",
+              width: 1,
             },
             smooth: true,
-            symbol: 'none',
-            data: AvgFlowData
-          }
-        ]
-      }
-      option && this.myChart.setOption(option)
+            symbol: "none",
+            data: AvgFlowData,
+          },
+        ],
+      };
+      option && this.myChart.setOption(option);
     },
-    replaceSign (str) {
-      const s = str.replaceAll('；', '；\r\n')
-      return s
+    replaceSign(str) {
+      const s = str.replaceAll("；", "；\r\n");
+      return s;
     },
     // 设置公交数据
-    setBusData (data) {
-      this.$refs.ScenicBus.setBus(data)
+    setBusData(data) {
+      this.$refs.ScenicBus.setBus(data);
     },
     // 设置停车场数据
-    setParkData (data) {
-      this.$refs.ScenicPark.setPark(data)
+    setParkData(data) {
+      this.$refs.ScenicPark.setPark(data);
     },
     // 设置地铁数据
-    setSubwayData (data) {
-      this.$refs.ScenicSubway.setSubway(data)
+    setSubwayData(data) {
+      this.$refs.ScenicSubway.setSubway(data);
     },
     //  点击分页获取bus
-    getBusByPage (page) {
-      this.$emit('get-bus-page', page)
+    getBusByPage(page) {
+      this.$emit("get-bus-page", page);
     },
     // 点击分页获取park
-    getParkByPage (page) {
-      this.$emit('get-park-page', page)
+    getParkByPage(page) {
+      this.$emit("get-park-page", page);
     },
     // 点击分页获取地铁
-    getSubwayByPage (page) {
-      this.$emit('get-Subway-page', page)
+    getSubwayByPage(page) {
+      this.$emit("get-Subway-page", page);
     },
     // 适宜人群
-    setFits (Unsuit) {
-      if (Unsuit === '老') {
-        this.unsuitImg = require('../../../assets/fitpeople/icon_age_noold.svg')
+    setFits(Unsuit) {
+      if (Unsuit === "老") {
+        this.unsuitImg = require("../../../assets/fitpeople/icon_age_noold.svg");
       }
     },
     // 风险提示
-    setRisks (risks) {
-      this.Risk = risks
+    setRisks(risks) {
+      this.Risk = risks;
     },
     // 选择公交站
-    selectBus (busInfo) {
-      this.setAllDatasUnselected()
-      this.$emit('select-bus', busInfo)
+    selectBus(busInfo) {
+      this.setAllDatasUnselected();
+      this.$emit("select-bus", busInfo);
     },
     // 选择停车站
-    selectPark (parkInfo) {
-      this.setAllDatasUnselected()
-      this.$emit('select-park', parkInfo)
+    selectPark(parkInfo) {
+      this.setAllDatasUnselected();
+      this.$emit("select-park", parkInfo);
     },
     // 选择地铁
-    selectSubway (subwayInfo) {
-      this.setAllDatasUnselected()
-      this.$emit('select-subway', subwayInfo)
+    selectSubway(subwayInfo) {
+      this.setAllDatasUnselected();
+      this.$emit("select-subway", subwayInfo);
     },
     // 使所有数据不selected
-    setAllDatasUnselected () {
-      this.$refs.ScenicBus.setUnSelected()
-      this.$refs.ScenicPark.setUnSelected()
-      this.$refs.ScenicSubway.setUnSelected()
+    setAllDatasUnselected() {
+      this.$refs.ScenicBus.setUnSelected();
+      this.$refs.ScenicPark.setUnSelected();
+      this.$refs.ScenicSubway.setUnSelected();
       // 强制刷新
-      this.$refs.ScenicBus.$forceUpdate()
-      this.$refs.ScenicPark.$forceUpdate()
-      this.$refs.ScenicSubway.$forceUpdate()
-    }
+      this.$refs.ScenicBus.$forceUpdate();
+      this.$refs.ScenicPark.$forceUpdate();
+      this.$refs.ScenicSubway.$forceUpdate();
+    },
   },
-  mounted () {
-    this.createEcharts()
+  mounted() {
+    this.createEcharts();
   },
   components: {
     ScenicBus,
     ScenicPark,
-    ScenicSubway
-  }
-}
+    ScenicSubway,
+  },
+};
 </script>
 
 <style scoped>
@@ -375,6 +384,11 @@ export default {
 }
 .traffic_title {
   padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+.traffic_title span {
+  padding-left: 10px;
 }
 
 .warningBox {
