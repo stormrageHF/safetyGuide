@@ -33,8 +33,13 @@
           :key="item.Id"
           @click="InfectiousClick(item)"
         >
-          <img :src="item.Img" alt="" />
-          <div>{{ item.Name }}</div>
+        <div>
+          <img class="InfectiousImg" :src="item.Img" alt="" />
+        </div>
+        <div class="InfectiousDescBox">
+          <div class="InfectiousName">{{ item.Name }}</div>
+          <div class="InfectiousDesc">{{ item.Descript }}</div>
+        </div>
         </div>
       </div>
     </div>
@@ -162,20 +167,17 @@ p {
 .climate_response {
   padding-top: 20px;
 }
-.climate_response_item,
-.Infectious_item {
+.climate_response_item {
   display: inline-block;
   width: 33%;
   text-align: center;
   margin-bottom: 20px;
 }
-.climate_response_item img,
-.Infectious_item img {
+.climate_response_item img {
   display: block;
   margin: 0 auto;
 }
-.climate_response_item div,
-.Infectious_item div {
+.climate_response_item div {
   font-size: 14px;
   color: #4d4d4d;
   letter-spacing: 0.88px;
@@ -204,7 +206,7 @@ p {
   text-align: justify;
 }
 .Infectious_list {
-  margin-top: 20px;
+  margin-top: 2px;
 }
 .Food_structure {
   padding: 20px;
@@ -232,5 +234,42 @@ p {
   padding: 20px;
   text-align: center;
   line-height: 180%;
+}
+
+.Infectious_item {
+  border-bottom: 1px solid #e6e6e6;
+  padding-top: 15px;
+  display: flex;
+  /* align-items: center; */
+  justify-content: flex-start;
+}
+.InfectiousImg {
+  width: 70px;
+  height: 70px;
+  padding-top: 3px;
+}
+.InfectiousDescBox {
+  padding-left: 15px;
+  display: block;
+  min-height: 90px;
+}
+.InfectiousName {
+  font-family: PingFangSC-Medium;
+  font-size: 16px;
+  color: #4d4d4d;
+  text-align: justify;
+}
+.InfectiousDesc {
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #4d4d4d;
+  text-align: justify;
+  margin-top: 5px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 </style>

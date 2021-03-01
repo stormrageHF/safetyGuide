@@ -79,3 +79,8 @@ export const GetDisease = data => {
 export const GetClimate = data => {
   return ajaxReq('/Manager/GetClimate', data, 'GET')
 }
+
+// 获取risk详情
+export const GetScenicRiskDetail = data => {
+  return ajaxReq('/Manager/GetScenicRiskDetail', data, 'GET')
+}

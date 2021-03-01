@@ -67,8 +67,14 @@
     <div class="info_item">
       <div class="info_title">风险提示</div>
       <div class="warningBox">
-        <div v-for="r in Risk" :key="r">
-          <img class="warningImg" :src="r" alt="" />
+        <div class="risk_item" v-for="r in Risk" :key="r.Id" @click="riskItemClick(r)">
+          <div>
+            <img class="warningImg" :src="r.ImgLink" alt="" />
+          </div>
+          <div class="riskDescBox">
+            <div class="riskName">{{ r.Name }}</div>
+            <div class="riskDesc">{{ r.Descript }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -315,6 +321,12 @@ export default {
       this.$refs.ScenicPark.$forceUpdate();
       this.$refs.ScenicSubway.$forceUpdate();
     },
+    // 点击风险提示
+    riskItemClick(r){
+      const id = r.Id
+      this.$router.push({ name: 'RiskDetail', params: { name: r.Name } })
+      localStorage.riskId = id // risk id
+    }
   },
   mounted() {
     this.createEcharts();
@@ -392,15 +404,43 @@ export default {
 }
 
 .warningBox {
+  margin-top: 1px;
+}
+.risk_item {
+  border-bottom: 1px solid #e6e6e6;
+  padding-top: 15px;
   display: flex;
+  /* align-items: center; */
   justify-content: flex-start;
-  margin-top: 20px;
 }
 .warningImg {
   width: 80px;
   height: 80px;
   display: block;
-  padding: 5px;
+}
+.riskDescBox {
+  padding-left: 15px;
+  display: block;
+  height: 100px;
+}
+.riskName {
+  font-family: PingFangSC-Medium;
+  font-size: 16px;
+  color: #4d4d4d;
+  text-align: justify;
+}
+.riskDesc {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #4d4d4d;
+  text-align: justify;
+  margin-top: 5px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 #crowding {
   width: 100%;
