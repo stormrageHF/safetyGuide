@@ -323,11 +323,9 @@ export default {
     },
     // 点击风险提示
     riskItemClick(r){
-      // const id = r.Id
-      // this.$router.push({ name: 'RiskDetail', params: { name: r.Name } })
-      // localStorage.riskId = id // risk id
-
-      this.$router.push({ name: 'Test' })
+      const id = r.Id
+      this.$router.push({ name: 'RiskDetail', params: { name: r.Name } })
+      localStorage.riskId = id // risk id
     }
   },
   mounted() {
