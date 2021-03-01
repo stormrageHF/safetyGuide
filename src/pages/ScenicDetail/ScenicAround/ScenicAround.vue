@@ -10,6 +10,7 @@
         >
           <div class="first_content">
             <div class="med_header">
+              <img :src="getIconByType(medical.type)" alt="">
               <span>
                 {{ medical.type }}
               </span>
@@ -64,6 +65,22 @@ export default {
           })
         })
       }
+    },
+    // 通过名字获取icon
+    getIconByType(type){
+      const name = type
+      let icon = require('@/assets/scenic/icon_hospital.svg')
+      switch (name) {
+        case '药房':
+          icon = require('@/assets/scenic/icon_drugstore.svg')
+          break;
+        case '诊所':
+          icon = require('@/assets/scenic/icon_clinic.svg')
+          break;
+        default:
+          break;
+      }
+      return icon
     }
   },
   mounted () {}
@@ -99,10 +116,16 @@ export default {
   text-align: justify;
   font-weight: 450;
   margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+.med_header span {
+  margin-left: 10px;
 }
 .med_content_item {
   color: #4d4d4d;
-  font-size: 14px;
+  font-size: 12px;
   margin-top: 10px;
+  letter-spacing: 0.75;
 }
 </style>

@@ -400,6 +400,7 @@ export default {
   width: 80px;
   height: 80px;
   display: block;
+  padding: 5px;
 }
 #crowding {
   width: 100%;

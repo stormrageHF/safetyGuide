@@ -23,6 +23,9 @@
 
     <div class="Infectious_box">
       <div class="Infectious_title">当地常见传染性疾病</div>
+      <div class="Infectious_des">
+        来自当地卫生健康委员会公布的法定传染病历史统计情况，按发病数量从高到低排列。
+      </div>
       <div class="Infectious_list">
         <div
           class="Infectious_item"
@@ -66,64 +69,61 @@
 
 <script>
 export default {
-  name: 'Healthy',
-  data () {
+  name: "Healthy",
+  data() {
     return {
       InfectiousData: [],
-      Img: '',
-      Descript: '',
+      Img: "",
+      Descript: "",
       Content: [],
       FoodStructrue: [
         {
-          name: '当地膳食结构特点',
-          text:
-            ''
+          name: "当地膳食结构特点",
+          text: "",
         },
         {
-          name: '膳食结构缺陷',
-          text:
-            ''
+          name: "膳食结构缺陷",
+          text: "",
         },
         {
-          name: '营养建议',
-          text:
-            ''
-        }
+          name: "营养建议",
+          text: "",
+        },
       ],
-      JKZXName: '',
-      JKZXPhone: ''
-    }
+      JKZXName: "",
+      JKZXPhone: "",
+    };
   },
   methods: {
-    setData (data) {
-      this.InfectiousData = data.DiseaseDtos
-      this.JKZXName = data.JKZXName
-      this.JKZXPhone = data.JKZXPhone
+    setData(data) {
+      this.InfectiousData = data.DiseaseDtos;
+      this.JKZXName = data.JKZXName;
+      this.JKZXPhone = data.JKZXPhone;
       // DietJGTD  DietJGQX  DietYYJY
-      this.FoodStructrue[0].text = data.DietJGTD
-      this.FoodStructrue[1].text = data.DietJGQX
-      this.FoodStructrue[2].text = data.DietYYJY
+      this.FoodStructrue[0].text = data.DietJGTD;
+      this.FoodStructrue[1].text = data.DietJGQX;
+      this.FoodStructrue[2].text = data.DietYYJY;
     },
-    setClimate (data) {
-      this.climateData = data
-      this.Img = this.climateData.Img
-      this.Descript = this.climateData.Descript
-      this.Content = this.climateData.Content
+    setClimate(data) {
+      this.climateData = data;
+      this.Img = this.climateData.Img;
+      this.Descript = this.climateData.Descript;
+      this.Content = this.climateData.Content;
     },
-    climateClick (row) {
+    climateClick(row) {
       // console.log(row);
-      const str = JSON.stringify(row)
-      sessionStorage.setItem('HealthyDetail', str)
-      this.$router.push('HealthyDetail')
+      const str = JSON.stringify(row);
+      sessionStorage.setItem("HealthyDetail", str);
+      this.$router.push("HealthyDetail");
     },
-    InfectiousClick (row) {
+    InfectiousClick(row) {
       // console.log(row);
-      const str = JSON.stringify(row)
-      sessionStorage.setItem('HealthyDetail', str)
-      this.$router.push('HealthyDetail')
-    }
-  }
-}
+      const str = JSON.stringify(row);
+      sessionStorage.setItem("HealthyDetail", str);
+      this.$router.push("HealthyDetail");
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -195,6 +195,13 @@ p {
   color: #4d4d4d;
   text-align: justify;
   font-weight: 550;
+}
+.Infectious_des {
+  font-size: 14px;
+  margin-top: 10px;
+  line-height: 180%;
+  color: #4d4d4d;
+  text-align: justify;
 }
 .Infectious_list {
   margin-top: 20px;
