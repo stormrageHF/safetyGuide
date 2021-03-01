@@ -10,10 +10,14 @@ import Vant from 'vant'
 import 'vant/lib/index.css'
 import proConfig from '../public/global/proConfig'
 
+
+
 Vue.use(ElementUI)
 Vue.use(VueAxios, axios)
 // Vue.use(VueAMap);
 Vue.use(Vant)
+
+Vue.prototype.$ProConfig = proConfig
 
 // VueAMap.initAMapApiLoader({
 //   key: '50c32d2e0c3e0d8250a934062d76bcda',

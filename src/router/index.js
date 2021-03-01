@@ -12,6 +12,7 @@ const ScenicDetail = () => import('../pages/ScenicDetail/ScenicDetail.vue')
 const HealthyDetail = () => import('../pages/HealthyDetail/HealthyDetail.vue')
 const DietDetail = () => import('../pages/DietDetail/DietDetail.vue')
 const RiskDetail = () => import('../pages/RiskDetail/RiskDetail.vue')
+const Test = () => import('../components/Test/Test.vue')
 
 Vue.use(Router)
 
@@ -68,6 +69,11 @@ const router = new Router({
       path: '/RiskDetail/:name',
       name: 'RiskDetail',
       component: RiskDetail
+    },
+    {
+      path: '/Test',
+      name: 'Test',
+      component: Test
     }
   ]
 })

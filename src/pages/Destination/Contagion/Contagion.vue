@@ -35,7 +35,15 @@
           </div>
         </div>
         <!-- 地图 -->
-        <div class="amap_wrapper" id="mapContainer"></div>
+
+        <!-- 高德 -->
+        <div class="amap_wrapper" id="mapContainer" v-show="this.$ProConfig.TURNONGAODE"></div>
+
+        <!-- echarts -->
+        <EchartsMap ref="EchartsMap" v-show="!this.$ProConfig.TURNONGAODE"></EchartsMap>
+        
+        <!-- <Test></Test> -->
+
         <div class="oversea_box">
           <img src="../../../assets/pic_diagram.svg" alt="" />
           <div class="path_box">
@@ -50,7 +58,11 @@
               <p class="high_risk_title">高风险区</p>
             </div>
             <div class="high_risk_body">
-              <div class="risk_item" v-for="(_hr, index) in highRiskData" :key="index">
+              <div
+                class="risk_item"
+                v-for="(_hr, index) in highRiskData"
+                :key="index"
+              >
                 <div>
                   <p>
                     {{ _hr.AreaName }}
@@ -58,7 +70,7 @@
                 </div>
                 <div>
                   <div v-for="(_cr, n) in _hr.Communitys" :key="n">
-                    <p>{{ n+1 + '.' + _cr }}</p>
+                    <p>{{ n + 1 + "." + _cr }}</p>
                   </div>
                 </div>
               </div>
@@ -69,7 +81,11 @@
               <p class="middle_risk_title">中风险区</p>
             </div>
             <div class="middle_risk_body">
-              <div class="risk_item" v-for="(_hr, index) in middleRiskData" :key="index">
+              <div
+                class="risk_item"
+                v-for="(_hr, index) in middleRiskData"
+                :key="index"
+              >
                 <div>
                   <p>
                     {{ _hr.AreaName }}
@@ -77,7 +93,7 @@
                 </div>
                 <div>
                   <div v-for="(_cr, n) in _hr.Communitys" :key="n">
-                    <p>{{ n+1 + '.' + _cr }}</p>
+                    <p>{{ n + 1 + "." + _cr }}</p>
                   </div>
                 </div>
               </div>
@@ -103,9 +119,7 @@
           <img :src="qrcodeImg" alt="" />
         </div>
         <div>
-          <p>
-            长按并识别二维码<br />查询春运防疫政策
-          </p>
+          <p>长按并识别二维码<br />查询春运防疫政策</p>
         </div>
       </div>
       <!-- 防护小贴士 -->
@@ -171,35 +185,37 @@ import {
   GetCovidByProvince,
   GetDetectionHospital,
   GetCovidHospital,
-  GetCountys
-} from '../../../api/index'
-import AMap from 'AMap'
+  GetCountys,
+} from "../../../api/index";
+import AMap from "AMap";
 // import Loca from "Loca";
+import EchartsMap from "@/components/EchartsMap/EchartsMap";
+// import Test from '@/components/Test/Test'
 
 export default {
-  name: 'Contagion',
-  props: ['bs'],
-  data () {
+  name: "Contagion",
+  props: ["bs"],
+  data() {
     return {
-      cityName: '',
-      county: '', // 区名
+      cityName: "",
+      county: "", // 区名
       // 医院列表
       hospitals: [],
-      hospitalActiveName: 'hesuan',
+      hospitalActiveName: "hesuan",
       // 小贴士
       protectTips: [
-        '提早到达机场/火车站，尽量自带笔、颈枕、小毯子。尽量选择靠窗座位，少来回走动，不乱摸公共物品，少进食，戴好口罩。随身携带含有酒精的小型免洗洗手液，消毒湿巾或棉片。',
-        '司机与乘客全程戴口罩，加强通风，空调采用外循环。尽量后排落座。',
-        '预约进场减少聚集，语音导游设备清洁消毒，减少触摸公共设施和物品。',
-        '扫码下单及移动支付减少直接接触。保持距离，减少停留时间，勤通风。',
-        '提前预约，必须自备毛巾。尽量和其他人保持1米以上距离，不扎堆锻炼，不闲聊，遵守防疫管理要求。存衣柜用前消毒。',
-        '优先使用电子菜单点餐，移送支付结账。使用公筷，分餐饮食，避免进食生的食物，特别是未熟透的肉类。',
-        '提前预约购票，分散浏览，避免人群聚集。避免接触可能传播疾病的野生动物。',
-        '提前列出购物清单，减少停留时间。尽量自助结账和移动支付。',
-        '提前购票，入场戴口罩，保持距离，不饮食。3D眼镜用前消毒。',
-        '就近选择医院，提前预约挂号，减少停留时间。减少触摸公共设施和物品。全程佩戴口罩。',
-        '用香皂和水洗手，持续至少20秒。当你使用完口罩后，把它扔掉，然后洗手，不要长时间重复使用同一个口罩。满足保暖条件下保持与室外通风。座机电话用前擦拭。',
-        '适量锻炼，平衡膳食，规律作息。认真清洗食材，生熟菜板分开。尽量无接触接收快递派送与外卖送餐。对快递包裹先消毒再打开。'
+        "提早到达机场/火车站，尽量自带笔、颈枕、小毯子。尽量选择靠窗座位，少来回走动，不乱摸公共物品，少进食，戴好口罩。随身携带含有酒精的小型免洗洗手液，消毒湿巾或棉片。",
+        "司机与乘客全程戴口罩，加强通风，空调采用外循环。尽量后排落座。",
+        "预约进场减少聚集，语音导游设备清洁消毒，减少触摸公共设施和物品。",
+        "扫码下单及移动支付减少直接接触。保持距离，减少停留时间，勤通风。",
+        "提前预约，必须自备毛巾。尽量和其他人保持1米以上距离，不扎堆锻炼，不闲聊，遵守防疫管理要求。存衣柜用前消毒。",
+        "优先使用电子菜单点餐，移送支付结账。使用公筷，分餐饮食，避免进食生的食物，特别是未熟透的肉类。",
+        "提前预约购票，分散浏览，避免人群聚集。避免接触可能传播疾病的野生动物。",
+        "提前列出购物清单，减少停留时间。尽量自助结账和移动支付。",
+        "提前购票，入场戴口罩，保持距离，不饮食。3D眼镜用前消毒。",
+        "就近选择医院，提前预约挂号，减少停留时间。减少触摸公共设施和物品。全程佩戴口罩。",
+        "用香皂和水洗手，持续至少20秒。当你使用完口罩后，把它扔掉，然后洗手，不要长时间重复使用同一个口罩。满足保暖条件下保持与室外通风。座机电话用前擦拭。",
+        "适量锻炼，平衡膳食，规律作息。认真清洗食材，生熟菜板分开。尽量无接触接收快递派送与外卖送餐。对快递包裹先消毒再打开。",
       ],
       // amapManager, // amap 管理
       amap: null, // 高德
@@ -219,18 +235,18 @@ export default {
       OverseasNum: 0,
       polygons: null,
       tipsImgs: [
-        require('../../../assets/contagionTips/icon_tips01.svg'),
-        require('../../../assets/contagionTips/icon_tips02.svg'),
-        require('../../../assets/contagionTips/icon_tips03.svg'),
-        require('../../../assets/contagionTips/icon_tips04.svg'),
-        require('../../../assets/contagionTips/icon_tips05.svg'),
-        require('../../../assets/contagionTips/icon_tips06.svg'),
-        require('../../../assets/contagionTips/icon_tips07.svg'),
-        require('../../../assets/contagionTips/icon_tips08.svg'),
-        require('../../../assets/contagionTips/icon_tips09.svg'),
-        require('../../../assets/contagionTips/icon_tips10.svg'),
-        require('../../../assets/contagionTips/icon_tips11.svg'),
-        require('../../../assets/contagionTips/icon_tips12.svg')
+        require("../../../assets/contagionTips/icon_tips01.svg"),
+        require("../../../assets/contagionTips/icon_tips02.svg"),
+        require("../../../assets/contagionTips/icon_tips03.svg"),
+        require("../../../assets/contagionTips/icon_tips04.svg"),
+        require("../../../assets/contagionTips/icon_tips05.svg"),
+        require("../../../assets/contagionTips/icon_tips06.svg"),
+        require("../../../assets/contagionTips/icon_tips07.svg"),
+        require("../../../assets/contagionTips/icon_tips08.svg"),
+        require("../../../assets/contagionTips/icon_tips09.svg"),
+        require("../../../assets/contagionTips/icon_tips10.svg"),
+        require("../../../assets/contagionTips/icon_tips11.svg"),
+        require("../../../assets/contagionTips/icon_tips12.svg"),
       ],
       RiskAreaInfo: null, // 高风险地区
       RiskAreaData: null, // 高风险地区具体数据
@@ -238,153 +254,163 @@ export default {
       highRiskData: [], // 高风险
       middleRiskData: [], // 中风险
       selectRegion: null, // 选中的行政区
-      qrcodeImg: require('../../../assets/fangyi.jpg') // 各地隔离政策链接
-    }
+      qrcodeImg: require("../../../assets/fangyi.jpg"), // 各地隔离政策链接
+    };
   },
   methods: {
     // 获取区县
-    async GetCountysAsync () {
-      const that = this
+    async GetCountysAsync() {
+      const that = this;
       const r = await GetCountys({
-        city: that.cityName
-      })
+        city: that.cityName,
+      });
       if (r.code === 1) {
-        that.districtList = [].concat(r.data.Countys)
-        that.county = that.districtList[0]
+        that.districtList = [].concat(r.data.Countys);
+        that.county = that.districtList[0];
         // console.log(that.districtList);
         // 获取医院列表
-        that.GetDetectionHospitalAsync()
+        that.GetDetectionHospitalAsync();
       }
     },
     // 获取疫情
-    async GetCovidAsync () {
-      const that = this
+    async GetCovidAsync() {
+      const that = this;
       const r = await GetCovidByProvince({
-        city: that.cityName
-      })
+        city: that.cityName,
+      });
       if (r.code === 1) {
         // console.log(r.data);
-        that.contagionDatas = r.data
+        that.contagionDatas = r.data;
         // 获取城市数据
         if (r.data.IsZXS) {
           // 直辖市
-          that.contagionCityDatas.adcode = r.data.adcode
-          that.contagionCityDatas.Todayconfirm = r.data.Todayconfirm
-          that.contagionCityDatas.confirm = r.data.confirm
-          that.contagionCityDatas.dead = r.data.dead
-          that.contagionCityDatas.heal = r.data.heal
-          that.contagionCityDatas.nowConfirm = r.data.nowConfirm
+          that.contagionCityDatas.adcode = r.data.adcode;
+          that.contagionCityDatas.Todayconfirm = r.data.Todayconfirm;
+          that.contagionCityDatas.confirm = r.data.confirm;
+          that.contagionCityDatas.dead = r.data.dead;
+          that.contagionCityDatas.heal = r.data.heal;
+          that.contagionCityDatas.nowConfirm = r.data.nowConfirm;
         } else {
           // 非直辖市
           that.contagionCityDatas = r.data.Details.filter((ele) =>
             that.cityName.includes(ele.name)
-          )[0]
+          )[0];
         }
         // 获取境外输入
         const dedata = that.contagionDatas.Details.find(
-          (item) => item.name === '境外输入'
-        )
+          (item) => item.name === "境外输入"
+        );
         if (dedata) {
-          that.OverseasNum = dedata.nowConfirm
+          that.OverseasNum = dedata.nowConfirm;
         }
         // 高风险
-        that.RiskAreaInfo = r.data.RiskAreaInfo
+        that.RiskAreaInfo = r.data.RiskAreaInfo;
         if (that.RiskAreaInfo.Data.length > 0) {
-          that.showRiskArea = true
-          that.highRiskData = []
-          that.middleRiskData = []
-          that.RiskAreaInfo.Data.forEach(area => {
+          that.showRiskArea = true;
+          that.highRiskData = [];
+          that.middleRiskData = [];
+          that.RiskAreaInfo.Data.forEach((area) => {
             if (area.CovidLevel === 2) {
               // 高
-              that.highRiskData.push(area)
+              that.highRiskData.push(area);
             } else {
               // 中
-              that.middleRiskData.push(area)
+              that.middleRiskData.push(area);
             }
-          })
+          });
         } else {
-          that.showRiskArea = false
-          that.RiskAreaInfo = null
-          that.highRiskData = []
-          that.middleRiskData = []
+          that.showRiskArea = false;
+          that.RiskAreaInfo = null;
+          that.highRiskData = [];
+          that.middleRiskData = [];
         }
         // that.drawBoundsByPolygons();
-        // 绘制对应区
-        that.drawAllBounds(that.contagionDatas.adcode)
-        that.translateDatas()
-        that.drawCityLabels()
+
+        // // 绘制对应区 暂时先不用
+        if (that.$ProConfig.TURNONGAODE) {
+          that.drawAllBounds(that.contagionDatas.adcode);
+          that.translateDatas();
+          that.drawCityLabels();
+        }
+
+        that.$refs.EchartsMap.createMap(
+          that.contagionDatas.adcode,
+          that.contagionDatas.Name.replace(/[省市]/, ""),
+          that.contagionDatas.Details
+        );
+
         // 设置城市
-        that.setCity()
+        that.setCity();
       }
     },
     // 获取检测结构
-    async GetDetectionHospitalAsync () {
-      const that = this
+    async GetDetectionHospitalAsync() {
+      const that = this;
       const r = await GetDetectionHospital({
         city: that.cityName,
-        county: that.county
+        county: that.county,
         // pageIndex: 1,
-      })
+      });
       if (r.code === 1) {
         // console.log(r.data);
         // that.hospitals = r.data.DataList;
-        that.hospitals = r.data
+        that.hospitals = r.data;
       }
     },
     // 获取定点医院
-    async GetCovidHospitalAsync () {
-      const that = this
+    async GetCovidHospitalAsync() {
+      const that = this;
       const r = await GetCovidHospital({
         city: that.cityName,
-        county: that.county
+        county: that.county,
         // pageIndex: 1,
-      })
+      });
       if (r.code === 1) {
         // console.log(r.data);
         // that.hospitals = r.data.DataList;
-        that.hospitals = r.data
+        that.hospitals = r.data;
       }
     },
     // 检测结构和定点医院
-    hospitalHandleClick (tab) {
-      if (tab.name === 'hesuan') {
-        this.isDetection = true
-        this.GetDetectionHospitalAsync()
+    hospitalHandleClick(tab) {
+      if (tab.name === "hesuan") {
+        this.isDetection = true;
+        this.GetDetectionHospitalAsync();
       } else {
-        this.isDetection = false
-        this.GetCovidHospitalAsync()
+        this.isDetection = false;
+        this.GetCovidHospitalAsync();
       }
     },
     // 选择区
-    tagClick (district, $event) {
-      const districtTags = document.getElementsByClassName('district_tag')
+    tagClick(district, $event) {
+      const districtTags = document.getElementsByClassName("district_tag");
       Array.from(districtTags).map((item) =>
-        item.classList.remove('district_tag_active')
-      )
-      $event.target.classList.add('district_tag_active')
-      this.county = district
+        item.classList.remove("district_tag_active")
+      );
+      $event.target.classList.add("district_tag_active");
+      this.county = district;
       // console.log(this.county);
       if (this.isDetection) {
-        this.GetDetectionHospitalAsync()
+        this.GetDetectionHospitalAsync();
       } else {
-        this.GetCovidHospitalAsync()
+        this.GetCovidHospitalAsync();
       }
     },
-    drawAllBounds (adcode) {
-      this.drawBounds(adcode)
+    drawAllBounds(adcode) {
+      this.drawBounds(adcode);
       // this.maplayer.goto(adcode);
     },
     // 地图绘制区
-    drawBounds (adcode) {
-      const that = this
+    drawBounds(adcode) {
+      const that = this;
       // 清除图层
-      that.disProvince && that.disProvince.setMap(null)
+      that.disProvince && that.disProvince.setMap(null);
 
       // 创建省份图层
       // 创建简易行政区函数
-      function initPro (code, dep) {
+      function initPro(code, dep) {
         // 获取内存中已经存在的行政区对象
-        const map = that.amap
+        const map = that.amap;
 
         that.disProvince = new AMap.DistrictLayer.Province({
           zIndex: 12,
@@ -392,170 +418,170 @@ export default {
           depth: dep,
           styles: {
             fill: function (properties) {
-              const adcode = properties.adcode
-              return that.getColorByAdcode(adcode)
+              const adcode = properties.adcode;
+              return that.getColorByAdcode(adcode);
             },
-            'province-stroke': 'white',
-            'city-stroke': 'white', // 中国地级市边界
-            'county-stroke': 'white' // 中国区县边界
-          }
-        })
+            "province-stroke": "white",
+            "city-stroke": "white", // 中国地级市边界
+            "county-stroke": "white", // 中国区县边界
+          },
+        });
 
-        that.disProvince.setMap(map)
+        that.disProvince.setMap(map);
       }
 
       // details
       if (!that.contagionDatas.IsZXS) {
-        initPro(adcode, 1)
+        initPro(adcode, 1);
       } else {
-        initPro(adcode, 2)
+        initPro(adcode, 2);
       }
       // 绑定touch 事件,只绑定一次
-      that.bindClickOnce()
+      that.bindClickOnce();
     },
     // 颜色辅助方法
-    getColorByAdcode (adcode) {
-      const that = this
-      const colors = {}
+    getColorByAdcode(adcode) {
+      const that = this;
+      const colors = {};
 
       if (!colors[adcode]) {
         const ele = that.contagionDatas.Details.find(
           (ele) => ele.adcode == adcode
-        )
+        );
         if (ele) {
-          const color = that.getFillColor(ele.nowConfirm)
-          colors[adcode] = color
+          const color = that.getFillColor(ele.nowConfirm);
+          colors[adcode] = color;
         }
       }
-      return colors[adcode]
+      return colors[adcode];
     },
     // 绑定地图点击事件，通过点击事件的坐标获取区的adcode，通过adcode 获取区的确诊人数
-    bindClickOnce () {
-      const that = this
+    bindClickOnce() {
+      const that = this;
       if (that.amap.isBinded) {
-        return
+        return;
       }
 
       // 点击事件函数
-      function showInfoClick (e) {
-        console.log('click 事件 ~~')
-        const x = e.lnglat.getLng()
-        const y = e.lnglat.getLat()
+      function showInfoClick(e) {
+        console.log("click 事件 ~~");
+        const x = e.lnglat.getLng();
+        const y = e.lnglat.getLat();
         // console.log(x,y);
-        var lnglatXY = [x, y] // 地图上所标点的坐标
+        var lnglatXY = [x, y]; // 地图上所标点的坐标
         // 城市 adcode 和 区数组
         // const adcode = that.contagionDatas.adcode;
-        const details = that.contagionDatas.Details
+        const details = that.contagionDatas.Details;
         // 逆地址编码对象
         const geoCoder = new AMap.Geocoder({
-          city: '' // 城市，默认：“全国”
-        })
+          city: "", // 城市，默认：“全国”
+        });
         // 通过坐标获取地址，区adcode
         geoCoder.getAddress(lnglatXY, function (status, result) {
-          console.log(status, result)
-          if (result.info === 'OK') {
+          console.log(status, result);
+          if (result.info === "OK") {
             // const _adcode = result.regeocode.addressComponent.adcode;
-            const _city = result.regeocode.addressComponent.city
-            const _district = result.regeocode.addressComponent.district
+            const _city = result.regeocode.addressComponent.city;
+            const _district = result.regeocode.addressComponent.district;
             // details
-            let _address, _n, infoObj
+            let _address, _n, infoObj;
             // 是否直辖市 同时记录选中的 region
             if (that.contagionDatas.IsZXS) {
-              infoObj = details.find((ele) => _district.includes(ele.name))
-              that.selectRegion = _district
+              infoObj = details.find((ele) => _district.includes(ele.name));
+              that.selectRegion = _district;
             } else {
-              infoObj = details.find((ele) => _city.includes(ele.name))
-              that.selectRegion = _city
+              infoObj = details.find((ele) => _city.includes(ele.name));
+              that.selectRegion = _city;
             }
             // console.log('现在确诊人数：' + n.nowConfirm, "区是:" + n.name);
             if (infoObj) {
-              _address = infoObj.name
-              _n = infoObj.nowConfirm
+              _address = infoObj.name;
+              _n = infoObj.nowConfirm;
             }
             if (_address !== undefined && _n !== undefined) {
               // that.$message({
               //   duration: 3000,
               //   message: _address + "现在确诊人数是" + _n,
               // });
-              that.$toast(_address + '现在确诊人数是' + _n)
+              that.$toast(_address + "现在确诊人数是" + _n);
             }
           }
           //
-        })
+        });
         // 修改选中样式
-        const px = e.pixel
-        const select_props = that.disProvince.getDistrictByContainerPos(px)
+        const px = e.pixel;
+        const select_props = that.disProvince.getDistrictByContainerPos(px);
         // console.log(select_props);
         if (select_props) {
           // 重置行政区样式
           that.disProvince.setStyles({
-            'city-stroke': function (props) {
-              return props.adcode == select_props.adcode ? 'black' : 'white'
+            "city-stroke": function (props) {
+              return props.adcode == select_props.adcode ? "black" : "white";
             },
-            'county-stroke': function (props) {
-              return props.adcode == select_props.adcode ? 'black' : 'white'
+            "county-stroke": function (props) {
+              return props.adcode == select_props.adcode ? "black" : "white";
             },
             fill: function (props) {
               // return props.adcode == select_props.adcode
               //   ? "yellow"
               //   : that.getColorByAdcode(props.adcode);
-              return that.getColorByAdcode(props.adcode)
-            }
-          })
+              return that.getColorByAdcode(props.adcode);
+            },
+          });
         }
         // 过滤选中的行政区 显示 risk area
         // that.showRiskAreas();
       }
-      that.amap.on('click', showInfoClick)
-      that.amap.isBinded = true
+      that.amap.on("click", showInfoClick);
+      that.amap.isBinded = true;
     },
     // 获取中国白色图层
-    getWhiteCHLayer () {
+    getWhiteCHLayer() {
       this.disCountry = new AMap.DistrictLayer.World({
         zIndex: 10,
         depth: 1,
         styles: {
-          'nation-stroke': '#ffffff',
-          'coastline-stroke': '#ffffff',
-          'province-stroke': '#ffffff',
+          "nation-stroke": "#ffffff",
+          "coastline-stroke": "#ffffff",
+          "province-stroke": "#ffffff",
           fill: function () {
-            return '#ffffff'
-          }
-        }
-      })
+            return "#ffffff";
+          },
+        },
+      });
     },
     // 根据人数获取颜色
-    getFillColor (num) {
-      num = parseInt(num)
-      let color = '#e4e7f3'
+    getFillColor(num) {
+      num = parseInt(num);
+      let color = "#e4e7f3";
       if (num >= 1 && num <= 9) {
-        color = '#ffe7b8'
+        color = "#ffe7b8";
       } else if (num >= 10 && num <= 49) {
-        color = '#ffdab3'
+        color = "#ffdab3";
       } else if (num >= 10 && num <= 49) {
-        color = '#ffdab3'
+        color = "#ffdab3";
       } else if (num >= 50 && num <= 99) {
-        color = '#ffc89e'
+        color = "#ffc89e";
       } else if (num >= 100 && num <= 499) {
-        color = '#ffaa80'
+        color = "#ffaa80";
       } else if (num >= 500 && num <= 999) {
-        color = '#ff7050'
+        color = "#ff7050";
       } else if (num >= 1000 && num <= 9999) {
-        color = '#f04141'
+        color = "#f04141";
       } else if (num >= 10000) {
-        color = '#cc1e1e'
+        color = "#cc1e1e";
       }
-      return color
+      return color;
     },
-    getDatas () {
-      const that = this
+    getDatas() {
+      const that = this;
       // 获取区县
-      that.GetCountysAsync()
+      that.GetCountysAsync();
       // 获取疫情
-      that.GetCovidAsync()
+      that.GetCovidAsync();
     },
-    setCity () {
-      const that = this
+    setCity() {
+      const that = this;
       if (this.amap) {
         // this.amap.setCity(this.contagionDatas.adcode);
         // // 获取地图显示范围
@@ -564,33 +590,33 @@ export default {
         // this.amap.setLimitBounds(bounds);
         // 自适应尺寸
         setTimeout(function () {
-          that.amap.setFitView()
-        }, 500)
+          that.amap.setFitView();
+        }, 500);
         //
       }
     },
     // polygons
-    drawBoundsByPolygons () {
-      const that = this
-      let district = null
+    drawBoundsByPolygons() {
+      const that = this;
+      let district = null;
       // 加载行政区划插件
       if (!district) {
         // 实例化DistrictSearch
         const opts = {
           subdistrict: 0, // 获取边界不需要返回下级行政区
-          extensions: 'all', // 返回行政区边界坐标组等具体信息
-          level: 'district' // 查询行政级别为市
-        }
-        district = new AMap.DistrictSearch(opts)
+          extensions: "all", // 返回行政区边界坐标组等具体信息
+          level: "district", // 查询行政级别为市
+        };
+        district = new AMap.DistrictSearch(opts);
       }
       // 行政区查询
-      district.setLevel('province')
+      district.setLevel("province");
       district.search(that.contagionDatas.adcode, function (status, result) {
         if (that.polygons) {
-          that.amap.remove(that.polygons)
+          that.amap.remove(that.polygons);
         } // 清除上次结果
-        that.polygons = []
-        const bounds = result.districtList[0].boundaries
+        that.polygons = [];
+        const bounds = result.districtList[0].boundaries;
         if (bounds) {
           for (let i = 0, l = bounds.length; i < l; i++) {
             // 生成行政区划polygon
@@ -598,100 +624,100 @@ export default {
               strokeWeight: 1,
               path: bounds[i],
               fillOpacity: 0.4,
-              fillColor: '#80d8ff',
-              strokeColor: '#0091ea'
-            })
-            that.polygons.push(polygon)
+              fillColor: "#80d8ff",
+              strokeColor: "#0091ea",
+            });
+            that.polygons.push(polygon);
           }
         }
-        that.amap.add(that.polygons)
-        that.amap.setFitView(that.polygons) // 视口自适应
-      })
+        that.amap.add(that.polygons);
+        that.amap.setFitView(that.polygons); // 视口自适应
+      });
     },
     // 地理数据转换
-    translateDatas () {
+    translateDatas() {
       const directions = {
-        门头沟区: 'left',
-        海淀区: 'top',
-        东城区: 'top',
-        通州区: 'right',
-        朝阳区: 'right',
-        怀柔区: 'top',
-        北辰区: 'top',
-        河东区: 'right',
-        河西区: 'bottom',
-        河北区: 'top',
-        红桥区: 'left',
-        南开区: 'left',
-        东丽区: 'right',
-        晋中市: 'bottom',
-        太原市: 'top'
-      }
+        门头沟区: "left",
+        海淀区: "top",
+        东城区: "top",
+        通州区: "right",
+        朝阳区: "right",
+        怀柔区: "top",
+        北辰区: "top",
+        河东区: "right",
+        河西区: "bottom",
+        河北区: "top",
+        红桥区: "left",
+        南开区: "left",
+        东丽区: "right",
+        晋中市: "bottom",
+        太原市: "top",
+      };
 
-      const that = this
-      that.LabelsData = []
+      const that = this;
+      that.LabelsData = [];
       // const districts = beijing.districts[0].districts;
-      const districts = that.contagionDatas.Details
+      const districts = that.contagionDatas.Details;
       for (let i = 0; i < districts.length; i++) {
         const config = {
-          name: '',
+          name: "",
           position: [116.12, 39.11],
           zooms: [4, 13],
           zIndex: 1,
           opacity: 1,
           text: {
-            content: '',
-            direction: 'center',
+            content: "",
+            direction: "center",
             offset: [0, 0],
             zooms: [3, 20],
             style: {
               fontSize: 8,
-              fontWeight: '400',
-              fillColor: 'black'
-            }
-          }
+              fontWeight: "400",
+              fillColor: "black",
+            },
+          },
+        };
+        const district = districts[i];
+        const name = district.name;
+        if (district.adcode === "") {
+          continue;
         }
-        const district = districts[i]
-        const name = district.name
-        if (district.adcode === '') {
-          continue
-        }
-        config.text.content = name
-        config.position = district.Center.split(',')
+        config.text.content = name;
+        config.position = district.Center.split(",");
         // config.position = district.center.split(",");
         if (directions[name]) {
-          config.text.direction = directions[name]
+          config.text.direction = directions[name];
         }
-        that.LabelsData.push(config)
+        that.LabelsData.push(config);
       }
     },
     // 绘制城市名称
-    drawCityLabels () {
-      const that = this
+    drawCityLabels() {
+      const that = this;
       if (that.labelsLayer) {
-        that.amap.remove(that.labelsLayer)
+        that.amap.remove(that.labelsLayer);
       }
       that.labelsLayer = new AMap.LabelsLayer({
         // 开启标注避让，默认为开启，v1.4.15 新增属性
         collision: false,
         // 开启标注淡入动画，默认为开启，v1.4.15 新增属性
-        animation: true
-      })
+        animation: true,
+      });
       for (let i = 0; i < that.LabelsData.length; i++) {
-        const labelsMarker = new AMap.LabelMarker(that.LabelsData[i])
-        that.labelsLayer.add(labelsMarker)
+        const labelsMarker = new AMap.LabelMarker(that.LabelsData[i]);
+        that.labelsLayer.add(labelsMarker);
         // console.log(that.LabelsData[i].text.content);
       }
-      that.amap.add(that.labelsLayer)
+      that.amap.add(that.labelsLayer);
     },
     // 刷新 bs
-    refreshBS () {
+    refreshBS() {
       if (this.bs.refresh) {
-        this.bs.refresh()
+        this.bs.refresh();
       }
     },
     // 绘制dislayer
-    DrawDistrictLayers () {
+    DrawDistrictLayers() {
       // const that = this;
       // // 绘制 layer
       // that.maplayer = new Loca.DistrictLayer({
@@ -719,60 +745,67 @@ export default {
       // that.maplayer.render();
     },
     // 显示 risk area
-    showRiskAreas () {
-      this.RiskAreaData = this.RiskAreaInfo.Data.filter(area => area.AreaName.includes(this.selectRegion))
+    showRiskAreas() {
+      this.RiskAreaData = this.RiskAreaInfo.Data.filter((area) =>
+        area.AreaName.includes(this.selectRegion)
+      );
       // console.log(this.RiskAreaData);
-    }
+    },
   },
-  created () {
-    console.log('created ~~')
+  created() {
+    console.log("created ~~");
   },
-  mounted () {
-    console.log('mounted ~~~')
+  mounted() {
+    console.log("mounted ~~~");
     // console.log(AMap.DistrictLayer);
-    const that = this
+    const that = this;
     // 中国白色图层
     // that.getWhiteCHLayer();
     // 获取高德地图
-    that.amap = new AMap.Map('mapContainer', {
+    that.amap = new AMap.Map("mapContainer", {
       doubleClickZoom: false,
       dragEnable: true,
       zoomEnable: true,
       touchZoom: true,
-      features: ['bg'],
-      viewMode: '3D',
+      features: ["bg"],
+      viewMode: "3D",
       // zoom: 7,
-      resizeEnable: true
+      resizeEnable: true,
       // layers: [that.disCountry],
-    })
+    });
     // // map 完成回调
-    that.amap.on('complete', function () {
-      console.log('地图创建完成')
-    })
+    that.amap.on("complete", function () {
+      console.log("地图创建完成");
+    });
 
     // that.DrawDistrictLayers();
 
     // 获取所在城市
     that.amap.getCity(function (info) {
-      console.log(info)
-      that.cityName = info.city === '' ? info.province : info.city
-      if (sessionStorage.cityName) { // 如果本地有城市名称
+      console.log(info);
+      that.cityName = info.city === "" ? info.province : info.city;
+      if (sessionStorage.cityName) {
+        // 如果本地有城市名称
         // alert('本地记录城市 - ' + sessionStorage.cityName)
-        that.cityName = sessionStorage.cityName
+        that.cityName = sessionStorage.cityName;
       }
-      that.$emit('get-city', that.cityName)
+      that.$emit("get-city", that.cityName);
       // 根据城市获取对应数据
-      that.getDatas()
-    })
+      that.getDatas();
+    });
 
     // const districtTags = document.getElementsByClassName("district_tag");
     // console.log(districtTags);
   },
-  updated () {
-    console.log('contagion -- updated ~~~')
-    this.refreshBS()
-  }
-}
+  updated() {
+    console.log("contagion -- updated ~~~");
+    this.refreshBS();
+  },
+  components: {
+    EchartsMap,
+    // Test,
+  },
+};
 </script>
 
 <style scoped>
