@@ -8,8 +8,8 @@
       </div>
     </div>
     <!-- 景区拥挤度 -->
-    <div class="info_item">
-      <div class="info_title">景区拥挤度</div>
+    <div class="info_item crowdingBox">
+      <div class="info_title crowdingTitle">景区拥挤度</div>
       <div class="echartsBox">
         <div id="crowding"></div>
       </div>
@@ -348,6 +348,12 @@ export default {
   margin-bottom: 20px;
   background-color: white;
   position: relative;
+}
+.crowdingBox {
+  padding: 20px 0;
+}
+.crowdingTitle {
+  padding-left: 20px;
 }
 .info_rate {
   position: absolute;

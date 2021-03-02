@@ -57,6 +57,9 @@
           <div class="food_struc_text">
             {{ item.text }}
           </div>
+          <div class="food_struc_img" v-if="item.DietTypeImg">
+            <img :src="item.DietTypeImg" alt="">
+          </div>
         </div>
       </div>
     </div>
@@ -89,6 +92,7 @@ export default {
         {
           name: "膳食结构缺陷",
           text: "",
+          DietTypeImg: "",
         },
         {
           name: "营养建议",
@@ -108,6 +112,7 @@ export default {
       this.FoodStructrue[0].text = data.DietJGTD;
       this.FoodStructrue[1].text = data.DietJGQX;
       this.FoodStructrue[2].text = data.DietYYJY;
+      this.FoodStructrue[1].DietTypeImg = data.DietTypeImg;
     },
     setClimate(data) {
       this.climateData = data;
@@ -271,5 +276,8 @@ p {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.food_struc_img img {
+  width: 100%;
 }
 </style>
