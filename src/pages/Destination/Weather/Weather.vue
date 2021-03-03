@@ -52,7 +52,7 @@
               </div>
             </div>
           </el-col>
-           <!-- 大气压 -->
+          <!-- 大气压 -->
           <el-col :span="12">
             <div class="com_img">
               <div>
@@ -122,8 +122,11 @@
             <el-col class="col_box" :span="1"></el-col>
           </el-row>
         </div>
-         <!-- 雪天开车 -->
-        <div class="clothes_item" v-if="weather.weather && weather.weather.includes('雪')">
+        <!-- 雪天开车 -->
+        <div
+          class="clothes_item"
+          v-if="weather.weather && weather.weather.includes('雪')"
+        >
           <el-row class="row_box">
             <el-col class="col_box" :span="8">
               <div class="col_item">
@@ -158,7 +161,10 @@
           </el-row>
         </div>
         <!-- 大风 -->
-        <div class="clothes_item" v-if="weather.windsc && weather.windsc.slice(0,-1) >= windLevel">
+        <div
+          class="clothes_item"
+          v-if="weather.windsc && weather.windsc.slice(0, -1) >= windLevel"
+        >
           <el-row class="row_box">
             <el-col class="col_box" :span="8">
               <div class="col_item">
@@ -174,7 +180,7 @@
           </el-row>
         </div>
         <!-- 外套 -->
-        <div class="clothes_item">
+        <div class="clothes_item" v-if="false">
           <el-row class="row_box">
             <el-col class="col_box" :span="8">
               <div class="col_item">
@@ -192,15 +198,16 @@
           </el-row>
         </div>
         <!-- 增减衣库 -->
-        <div class="clothes_item" style="border-color: transparent">
+        <div
+          class="clothes_item"
+          v-if="false"
+          style="border-color: transparent"
+        >
           <!-- man -->
           <el-row class="row_box">
             <el-col class="col_box" :span="8">
               <div class="col_item">
-                <img
-                  src="../../../assets/liveTips/icon_man.svg"
-                  alt=""
-                />
+                <img src="../../../assets/liveTips/icon_man.svg" alt="" />
               </div>
             </el-col>
             <el-col class="col_box" :span="15">
@@ -211,7 +218,7 @@
             <el-col class="col_box" :span="1"></el-col>
           </el-row>
           <!-- woman -->
-           <el-row class="row_box">
+          <el-row class="row_box">
             <el-col class="col_box" :span="8">
               <div class="col_item">
                 <img
@@ -228,13 +235,10 @@
             <el-col class="col_box" :span="1"></el-col>
           </el-row>
           <!-- old -->
-           <el-row class="row_box">
+          <el-row class="row_box">
             <el-col class="col_box" :span="8">
               <div class="col_item">
-                <img
-                  src="../../../assets/liveTips/icon_old.svg"
-                  alt=""
-                />
+                <img src="../../../assets/liveTips/icon_old.svg" alt="" />
               </div>
             </el-col>
             <el-col class="col_box" :span="15">
@@ -247,6 +251,16 @@
         </div>
       </div>
     </div>
+
+    <!-- 衣服建议新设计 -->
+    <div class="clothes_new">
+      <img
+        class="clothes_item_img"
+        :src="weather.real | getClothesImg"
+        alt=""
+      />
+    </div>
+
     <!-- 空气污染 -->
     <div class="air_pollution_box white_bg" v-if="IsAirQuality">
       <div class="air_title_box">
@@ -264,12 +278,10 @@
               class="Chemistry_box"
               :class="{ red_color: airQuality.so2 > so2_standard }"
             >
-              <span class="Chemistry_text"
-                >
+              <span class="Chemistry_text">
                 <!-- SO<span class="Chemistry_two">2</span> -->
                 <span>二氧化硫</span>
-                </span
-              >
+              </span>
               <span class="Chemistry_value">{{ airQuality.so2 }}</span>
             </div>
           </el-col>
@@ -279,12 +291,10 @@
               class="Chemistry_box"
               :class="{ red_color: airQuality.no2 > no2_standard }"
             >
-              <span class="Chemistry_text"
-                >
+              <span class="Chemistry_text">
                 <!-- NO<span class="Chemistry_two">2</span> -->
                 <span>二氧化氮</span>
-                </span
-              >
+              </span>
               <span class="Chemistry_value">{{ airQuality.no2 }}</span>
             </div>
           </el-col>
@@ -296,12 +306,10 @@
               class="Chemistry_box"
               :class="{ red_color: airQuality.o3 > o3_standard }"
             >
-              <span class="Chemistry_text"
-                >
+              <span class="Chemistry_text">
                 <!-- O<span class="Chemistry_two">3</span> -->
                 <span>臭氧</span>
-                </span
-              >
+              </span>
               <span class="Chemistry_value">{{ airQuality.o3 }}</span>
             </div>
           </el-col>
@@ -347,85 +355,80 @@
         </el-row>
       </div>
       <div>
-      <!-- 空气污染提示 -->
-      <div class="air_Excessive_box">
-        <!-- pm2.5 超标 -->
-        <div class="air_Excessive_item" v-if="airQuality.pm2_5 > 75">
-          <el-row class="row_box">
-            <el-col class="col_box" :span="8">
-              <div class="col_item">
-                <img
-                  src="../../../assets/liveTips/icon_mask.svg"
-                  alt=""
-                />
-              </div>
-            </el-col>
-            <el-col class="col_box" :span="15">
-              <div class="col_item">
-                <p class="clothes_p">需要带上N95口罩</p>
-              </div>
-            </el-col>
-            <el-col class="col_box" :span="1"></el-col>
-          </el-row>
+        <!-- 空气污染提示 -->
+        <div class="air_Excessive_box">
+          <!-- pm2.5 超标 -->
+          <div class="air_Excessive_item" v-if="airQuality.pm2_5 > 75">
+            <el-row class="row_box">
+              <el-col class="col_box" :span="8">
+                <div class="col_item">
+                  <img src="../../../assets/liveTips/icon_mask.svg" alt="" />
+                </div>
+              </el-col>
+              <el-col class="col_box" :span="15">
+                <div class="col_item">
+                  <p class="clothes_p">需要带上N95口罩</p>
+                </div>
+              </el-col>
+              <el-col class="col_box" :span="1"></el-col>
+            </el-row>
+          </div>
+          <!-- AQI < 100 -->
+          <div class="air_Excessive_item" v-if="airQuality.aqi < 100">
+            <el-row class="row_box">
+              <el-col class="col_box" :span="8">
+                <div class="col_item">
+                  <img src="../../../assets/liveTips/icon_outdoor.svg" alt="" />
+                </div>
+              </el-col>
+              <el-col class="col_box" :span="15">
+                <div class="col_item">
+                  <p class="clothes_p clothes_stand">适合户外运动锻炼</p>
+                </div>
+              </el-col>
+              <el-col class="col_box" :span="1"></el-col>
+            </el-row>
+          </div>
+          <!-- AQI >= 100 -->
+          <div class="air_Excessive_item" v-if="airQuality.aqi >= 100">
+            <el-row class="row_box">
+              <el-col class="col_box" :span="8">
+                <div class="col_item">
+                  <img
+                    src="../../../assets/liveTips/icon_dontoutdoor.svg"
+                    alt=""
+                  />
+                </div>
+              </el-col>
+              <el-col class="col_box" :span="15">
+                <div class="col_item">
+                  <p class="clothes_p clothes_stand">不适合长时间户外运动</p>
+                </div>
+              </el-col>
+              <el-col class="col_box" :span="1"></el-col>
+            </el-row>
+          </div>
+          <!-- AQI > 300 -->
+          <div
+            class="air_Excessive_item"
+            style="border-color: transparent"
+            v-if="airQuality.aqi > 300"
+          >
+            <el-row class="row_box">
+              <el-col class="col_box" :span="8">
+                <div class="col_item">
+                  <img src="../../../assets/liveTips/icon_indoor.svg" alt="" />
+                </div>
+              </el-col>
+              <el-col class="col_box" :span="15">
+                <div class="col_item">
+                  <p class="clothes_p clothes_stand">建议尽量呆在室内</p>
+                </div>
+              </el-col>
+              <el-col class="col_box" :span="1"></el-col>
+            </el-row>
+          </div>
         </div>
-       <!-- AQI < 100 -->
-        <div class="air_Excessive_item" v-if="airQuality.aqi < 100">
-          <el-row class="row_box">
-            <el-col class="col_box" :span="8">
-              <div class="col_item">
-                <img
-                  src="../../../assets/liveTips/icon_outdoor.svg"
-                  alt=""
-                />
-              </div>
-            </el-col>
-            <el-col class="col_box" :span="15">
-              <div class="col_item">
-                <p class="clothes_p clothes_stand">适合户外运动锻炼</p>
-              </div>
-            </el-col>
-            <el-col class="col_box" :span="1"></el-col>
-          </el-row>
-        </div>
-         <!-- AQI >= 100 -->
-        <div class="air_Excessive_item" v-if="airQuality.aqi >= 100">
-          <el-row class="row_box">
-            <el-col class="col_box" :span="8">
-              <div class="col_item">
-                <img
-                  src="../../../assets/liveTips/icon_dontoutdoor.svg"
-                  alt=""
-                />
-              </div>
-            </el-col>
-            <el-col class="col_box" :span="15">
-              <div class="col_item">
-                <p class="clothes_p clothes_stand">不适合长时间户外运动</p>
-              </div>
-            </el-col>
-            <el-col class="col_box" :span="1"></el-col>
-          </el-row>
-        </div>
-        <!-- AQI > 300 -->
-        <div class="air_Excessive_item" style="border-color: transparent" v-if="airQuality.aqi > 300">
-          <el-row class="row_box">
-            <el-col class="col_box" :span="8">
-              <div class="col_item">
-                <img
-                  src="../../../assets/liveTips/icon_indoor.svg"
-                  alt=""
-                />
-              </div>
-            </el-col>
-            <el-col class="col_box" :span="15">
-              <div class="col_item">
-                <p class="clothes_p clothes_stand">建议尽量呆在室内</p>
-              </div>
-            </el-col>
-            <el-col class="col_box" :span="1"></el-col>
-          </el-row>
-        </div>
-      </div>
       </div>
     </div>
     <!-- 日出日落 -->
@@ -464,9 +467,9 @@
 // import { GetWeather } from '../../../api/index';
 
 export default {
-  name: 'Weahter',
-  props: ['bs'],
-  data () {
+  name: "Weahter",
+  props: ["bs"],
+  data() {
     return {
       weather: {},
       airQuality: {},
@@ -477,8 +480,8 @@ export default {
       co_standard: 15500, // co 超标
       pm10_standard: 255, // pm10 超标
       o3_standard: 350, // o3 超标
-      windLevel: 7 // 大风级别
-    }
+      windLevel: 7, // 大风级别
+    };
   },
   methods: {
     // 获取天气
@@ -493,50 +496,69 @@ export default {
     //   }
     // },
   },
-  mounted () {
+  mounted() {
     // this.GetWeatherAsync();
     // console.log('-------' + this.city);
-    console.log('weather -- mounted ~~')
+    console.log("weather -- mounted ~~");
     // if (this.bs.refresh) {
     //   this.bs.refresh();
     // }
   },
-  updated () {
-    console.log('weather -- updated ~~')
+  updated() {
+    console.log("weather -- updated ~~");
     // if (this.bs.refresh) {
     //   this.bs.refresh();
     // }
   },
   filters: {
-    weatherClothes (value) {
+    weatherClothes(value) {
       // console.log(value);
       if (value) {
         // value = value.slice(0, -1);
         if (value <= 15) {
-          return '羽绒服'
+          return "羽绒服";
         } else if (value > 15 && value < 25) {
-          return '外套'
+          return "外套";
         } else {
-          return '短袖'
+          return "短袖";
         }
       }
     },
-    weatherClothImg (value) {
+    weatherClothImg(value) {
       // console.log(value);
       if (value) {
         // const t = value.slice(0, -1);
-        const t = value
+        const t = value;
         if (t <= 15) {
-          return require('../../../assets/liveTips/icon_downcoat.svg')
+          return require("../../../assets/liveTips/icon_downcoat.svg");
         } else if (t > 15 && t < 25) {
-          return require('../../../assets/liveTips/icon_coat.svg')
+          return require("../../../assets/liveTips/icon_coat.svg");
         } else {
-          return require('../../../assets/liveTips/icon_Tshirt.svg')
+          return require("../../../assets/liveTips/icon_Tshirt.svg");
         }
       }
-    }
-  }
-}
+    },
+    getClothesImg(value) {
+      if (value) {
+        if (value < 1) {
+          return require("@/assets/clothesTips/pic_dress_0toless.jpg");
+        }
+        if (value >= 1 && value <= 10) {
+          return require("@/assets/clothesTips/pic_dress_1to10.jpg");
+        }
+        if (value >= 11 && value <= 20) {
+          return require("@/assets/clothesTips/pic_dress_11to20.jpg");
+        }
+        if (value >= 21 && value <= 25) {
+          return require("@/assets/clothesTips/pic_dress_21to25.jpg");
+        }
+        if (value >= 26) {
+          return require("@/assets/clothesTips/pic_dress_26tomore.jpg");
+        }
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -546,9 +568,9 @@ export default {
 }
 .weather_tit {
   font-size: 12px;
-color: #4D4D4D;
-letter-spacing: 0.75px;
-text-align: justify;
+  color: #4d4d4d;
+  letter-spacing: 0.75px;
+  text-align: justify;
 }
 .white_bg {
   background-color: #ffffff;
@@ -564,7 +586,7 @@ text-align: justify;
   align-items: center;
   justify-content: flex-start;
 }
-.com_img>:nth-child(2){
+.com_img > :nth-child(2) {
   text-align: left;
   margin-left: 10px;
 }
@@ -573,17 +595,26 @@ text-align: justify;
   border-bottom: 1px solid #979797;
   padding-bottom: 30px;
 }
-.clothes_box, .air_Excessive_box {
+.clothes_box,
+.air_Excessive_box {
   font-size: 12px;
   color: #4a76c0;
   min-height: 100px;
   text-align: center;
   /* padding: 10px 0; */
 }
+.clothes_box {
+  min-height: 0;
+}
+.clothes_new {
+  width: 100vw;
+  margin-top: -1px;
+}
 .air_Excessive_box {
   min-height: 0;
 }
-.clothes_item, .air_Excessive_item {
+.clothes_item,
+.air_Excessive_item {
   min-height: 90px;
   border-bottom: 1px solid #979797;
 }
@@ -673,5 +704,9 @@ text-align: justify;
 .time_box {
   text-align: center;
   height: 20px;
+}
+.clothes_item_img {
+  width: 100%;
+  display: block;
 }
 </style>
