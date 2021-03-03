@@ -71,17 +71,19 @@ export default {
 <style scoped>
 .body_box {
   background-image: url("../../assets/images/home/home_bg.jpg");
-  background-size: 100% auto;
+  background-size: 100%;
   background-repeat: no-repeat;
   background-position: center top;
   width: 100%;
   height: 100vh;
   padding: 0;
   margin: 0;
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
+  /* background-color: blue; */
+  padding-top: 320px;
 }
 .menu_box {
-  margin-top: 320px;
+  /* margin-top: 320px; */
   padding: 20px;
 }
 .home_menu_btn {
