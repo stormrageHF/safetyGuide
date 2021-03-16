@@ -360,7 +360,7 @@ export default {
   width: 100%;
   height: 224px;
   /* background-color: thistle; */
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
   /* background: url('../../assets/bg_shanghai1.jpg') no-repeat; */
   background-size: cover;
   background-position: top;
@@ -420,6 +420,12 @@ export default {
   letter-spacing: 1.25px;
   /* text-align: justify; */
   color: #9fbeaf;
+}
+.el-tabs__item:focus {
+  color: #016f7e;
+}
+.el-tabs__item:active {
+  color: #016f7e;
 }
 .is-active {
   color: #016f7e !important;

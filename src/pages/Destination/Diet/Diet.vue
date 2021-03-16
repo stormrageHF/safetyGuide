@@ -126,6 +126,10 @@ export default {
           {
             // name: "预算 vs 开销（Budget vs spending）",
             type: "radar",
+            symbol: "none",
+            itemStyle: {
+              color: '#016F7E'
+            },
             areaStyle: {
               color: ["#a1d8b4"],
               opacity: 0.5,
