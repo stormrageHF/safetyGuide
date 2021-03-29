@@ -80,11 +80,21 @@ export default {
   width: 100%;
 }
 .content {
-  font-size: 16px;
+  /* font-size: 16px;
   color: #4d4d4d;
   letter-spacing: 1px;
   text-align: justify;
   line-height: 30px;
+  padding: 0 24px;
+  white-space: pre-line; */
+
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #4d4d4d;
+  letter-spacing: 1px;
+  text-align: justify;
+  line-height: 30px;
+  font-weight: 400;
   padding: 0 24px;
   white-space: pre-line;
 }

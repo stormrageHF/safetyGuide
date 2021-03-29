@@ -5,6 +5,7 @@ const Home = () => import('../pages/Home/Home.vue')
 const Destination = () => import('../pages/Destination/Destination.vue')
 const Assistance = () => import('../pages/Assistance/Assistance.vue')
 const Details = () => import('../components/Details/Details.vue')
+const AADetails = () => import('../components/Details/AADetails.vue')
 const Medical = () => import('../pages/Medical/Medical.vue')
 const Concierge = () => import('../pages/Concierge/Concierge.vue')
 const Consulting = () => import('../pages/Consulting/Consulting')
@@ -49,6 +50,11 @@ const router = new Router({
       path: '/details/:id',
       name: 'details',
       component: Details
+    },
+    {
+      path: '/aadetails/:id',
+      name: 'aadetails',
+      component: AADetails
     },
     {
       path: '/ScenicDetail/:name',

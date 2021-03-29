@@ -20,22 +20,22 @@ export default {
   data () {
     return {
       imgArr: [
-        require('../../assets/images/assistance/button_Assistance01.jpg'),
-        require('../../assets/images/assistance/button_Assistance02.jpg'),
-        require('../../assets/images/assistance/button_Assistance03.jpg'),
-        require('../../assets/images/assistance/button_Assistance04.jpg'),
-        require('../../assets/images/assistance/button_Assistance05.jpg'),
-        require('../../assets/images/assistance/button_Assistance06.jpg'),
-        require('../../assets/images/assistance/button_Assistance07.jpg'),
-        require('../../assets/images/assistance/button_Assistance08.jpg'),
-        require('../../assets/images/assistance/button_Assistance09.jpg')
+        require('../../assets/images/assistance/button_Assistance01.png'),
+        require('../../assets/images/assistance/button_Assistance02.png'),
+        require('../../assets/images/assistance/button_Assistance03.png'),
+        require('../../assets/images/assistance/button_Assistance04.png'),
+        require('../../assets/images/assistance/button_Assistance05.png'),
+        require('../../assets/images/assistance/button_Assistance06.png'),
+        require('../../assets/images/assistance/button_Assistance07.png'),
+        require('../../assets/images/assistance/button_Assistance08.png'),
+        require('../../assets/images/assistance/button_Assistance09.png')
       ]
     }
   },
   methods: {
     itemClick (t) {
       this.$router.push({
-        name: 'details',
+        name: 'aadetails',
         params: {
           id: 'ass' + t
         }
@@ -52,18 +52,21 @@ export default {
   background-repeat: no-repeat;
   background-position: center top;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  /* height: 100vh; */
   padding: 0;
   margin: 0;
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
+  padding-top: 180px;
+  box-sizing: border-box;
 }
 .menu_box {
-  margin-top: 320px;
+  /* margin-top: 320px; */
   padding: 20px;
 }
 .home_menu_btn {
   width: 100%;
-  height: 80px;
+  /* height: 80px; */
   margin-bottom: 20px;
 }
 .home_menu_btn:focus {
@@ -71,6 +74,6 @@ export default {
 }
 .btn_img {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 </style>

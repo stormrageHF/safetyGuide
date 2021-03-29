@@ -5,7 +5,7 @@
       <div class="home_menu_btn" @click="destinationClick">
         <img
           class="btn_img"
-          src="../../assets/images/home/home_menu01.jpg"
+          src="../../assets/images/home/home_menu01.png"
           alt=""
         />
       </div>
@@ -13,7 +13,7 @@
       <div class="home_menu_btn" @click="assistanceClick">
         <img
           class="btn_img"
-          src="../../assets/images/home/home_menu02.jpg"
+          src="../../assets/images/home/home_menu02.png"
           alt=""
         />
       </div>
@@ -21,7 +21,7 @@
       <div class="home_menu_btn" @click="medClick">
         <img
           class="btn_img"
-          src="../../assets/images/home/home_menu03.jpg"
+          src="../../assets/images/home/home_menu03.png"
           alt=""
         />
       </div>
@@ -29,7 +29,7 @@
       <div class="home_menu_btn" @click="consultClick">
         <img
           class="btn_img"
-          src="../../assets/images/home/home_menu04.jpg"
+          src="../../assets/images/home/home_menu04.png"
           alt=""
         />
       </div>
@@ -37,7 +37,7 @@
       <div class="home_menu_btn" @click="conciergeClick">
         <img
           class="btn_img"
-          src="../../assets/images/home/home_menu05.jpg"
+          src="../../assets/images/home/home_menu05.png"
           alt=""
         />
       </div>
@@ -70,17 +70,19 @@ export default {
 
 <style scoped>
 .body_box {
-  background-image: url("../../assets/images/home/home_bg.jpg");
+  background-image: url("../../assets/images/home/home_bg.jpeg");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center top;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  /* height: 100vh; */
   padding: 0;
   margin: 0;
   /* border: 1px solid transparent; */
   /* background-color: blue; */
-  padding-top: 320px;
+  padding-top: 70%;
+  box-sizing: border-box;
 }
 .menu_box {
   /* margin-top: 320px; */

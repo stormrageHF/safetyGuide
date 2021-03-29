@@ -14,20 +14,20 @@ export default {
   data () {
     return {
       imgArr: [
-        require('../../assets/images/consulting/button_Consulting01.jpg'),
-        require('../../assets/images/consulting/button_Consulting02.jpg'),
-        require('../../assets/images/consulting/button_Consulting03.jpg'),
-        require('../../assets/images/consulting/button_Consulting04.jpg'),
-        require('../../assets/images/consulting/button_Consulting05.jpg'),
-        require('../../assets/images/consulting/button_Consulting06.jpg'),
-        require('../../assets/images/consulting/button_Consulting07.jpg')
+        require('../../assets/images/consulting/button_Consulting01.png'),
+        require('../../assets/images/consulting/button_Consulting02.png'),
+        require('../../assets/images/consulting/button_Consulting03.png'),
+        require('../../assets/images/consulting/button_Consulting04.png'),
+        require('../../assets/images/consulting/button_Consulting05.png'),
+        require('../../assets/images/consulting/button_Consulting06.png'),
+        require('../../assets/images/consulting/button_Consulting07.png')
       ]
     }
   },
   methods: {
     itemClick (t) {
       this.$router.push({
-        name: 'details',
+        name: 'aadetails',
         params: {
           id: 'consult' + t
         }
@@ -44,18 +44,20 @@ export default {
   background-repeat: no-repeat;
   background-position: center top;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   padding: 0;
   margin: 0;
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
+  padding-top: 170px;
+  box-sizing: border-box;
 }
 .menu_box {
-  margin-top: 320px;
+  /* margin-top: 320px; */
   padding: 20px;
 }
 .home_menu_btn {
   width: 100%;
-  height: 80px;
+  /* height: 80px; */
   margin-bottom: 20px;
 }
 .home_menu_btn:focus {
@@ -63,6 +65,6 @@ export default {
 }
 .btn_img {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 </style>

@@ -20,17 +20,17 @@ export default {
   data () {
     return {
       imgArr: [
-        require('../../assets/images/medical/button_Medical01.jpg'),
-        require('../../assets/images/medical/button_Medical02.jpg'),
-        require('../../assets/images/medical/button_Medical03.jpg'),
-        require('../../assets/images/medical/button_Medical04.jpg')
+        require('../../assets/images/medical/button_Medical01.png'),
+        require('../../assets/images/medical/button_Medical02.png'),
+        require('../../assets/images/medical/button_Medical03.png'),
+        require('../../assets/images/medical/button_Medical04.png')
       ]
     }
   },
   methods: {
     itemClick (t) {
       this.$router.push({
-        name: 'details',
+        name: 'aadetails',
         params: {
           id: 'med' + t
         }
@@ -47,18 +47,21 @@ export default {
   background-repeat: no-repeat;
   background-position: center top;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  /* height: 100vh; */
   padding: 0;
   margin: 0;
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
+  padding-top: 240px;
+  box-sizing: border-box;
 }
 .menu_box {
-  margin-top: 320px;
+  /* margin-top: 320px; */
   padding: 20px;
 }
 .home_menu_btn {
   width: 100%;
-  height: 80px;
+  /* height: 80px; */
   margin-bottom: 20px;
 }
 .home_menu_btn:focus {
@@ -66,6 +69,6 @@ export default {
 }
 .btn_img {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 </style>
