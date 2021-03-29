@@ -45,21 +45,23 @@ export default {
   /* border: 1px solid transparent; */
   padding-top: 270px;
   box-sizing: border-box;
+    background-color: #016F7E;
+
 }
 .menu_box {
   /* margin-top: 320px; */
-  padding: 20px;
+  padding: 20px 0;
 }
 .home_menu_btn {
   width: 100%;
-  /* height: 80px; */
+  text-align: center;
   margin-bottom: 20px;
 }
 .home_menu_btn:focus {
   opacity: 0.8;
 }
 .btn_img {
-  width: 100%;
+  width: 78%;
   /* height: 100%; */
 }
 </style>

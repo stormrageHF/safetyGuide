@@ -10,31 +10,31 @@
 
 <script>
 export default {
-  name: 'Consulting',
-  data () {
+  name: "Consulting",
+  data() {
     return {
       imgArr: [
-        require('../../assets/images/consulting/button_Consulting01.png'),
-        require('../../assets/images/consulting/button_Consulting02.png'),
-        require('../../assets/images/consulting/button_Consulting03.png'),
-        require('../../assets/images/consulting/button_Consulting04.png'),
-        require('../../assets/images/consulting/button_Consulting05.png'),
-        require('../../assets/images/consulting/button_Consulting06.png'),
-        require('../../assets/images/consulting/button_Consulting07.png')
-      ]
-    }
+        require("../../assets/images/consulting/button_Consulting01.png"),
+        require("../../assets/images/consulting/button_Consulting02.png"),
+        require("../../assets/images/consulting/button_Consulting03.png"),
+        require("../../assets/images/consulting/button_Consulting04.png"),
+        require("../../assets/images/consulting/button_Consulting05.png"),
+        require("../../assets/images/consulting/button_Consulting06.png"),
+        require("../../assets/images/consulting/button_Consulting07.png"),
+      ],
+    };
   },
   methods: {
-    itemClick (t) {
+    itemClick(t) {
       this.$router.push({
-        name: 'aadetails',
+        name: "aadetails",
         params: {
-          id: 'consult' + t
-        }
-      })
-    }
-  }
-}
+          id: "consult" + t,
+        },
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -48,23 +48,25 @@ export default {
   padding: 0;
   margin: 0;
   /* border: 1px solid transparent; */
-  padding-top: 170px;
+  padding-top: 270px;
   box-sizing: border-box;
+  background-color: #016f7e;
 }
 .menu_box {
   /* margin-top: 320px; */
-  padding: 20px;
+  padding: 20px 0;
 }
 .home_menu_btn {
   width: 100%;
   /* height: 80px; */
   margin-bottom: 20px;
+  text-align: center;
 }
 .home_menu_btn:focus {
   opacity: 0.8;
 }
 .btn_img {
-  width: 100%;
+  width: 78%;
   /* height: 100%; */
 }
 </style>

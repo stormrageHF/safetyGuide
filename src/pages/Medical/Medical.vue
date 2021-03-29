@@ -1,14 +1,8 @@
 <template>
   <div class="body_box">
     <div class="menu_box">
-      <div
-        class="home_menu_btn"
-        v-for="t in 4"
-        :key="t"
-        @click="itemClick(t)"
-      >
-        <img class="btn_img"
-        :src="imgArr[t-1]"/>
+      <div class="home_menu_btn" v-for="t in 4" :key="t" @click="itemClick(t)">
+        <img class="btn_img" :src="imgArr[t - 1]" />
       </div>
     </div>
   </div>
@@ -16,28 +10,28 @@
 
 <script>
 export default {
-  name: 'Medical',
-  data () {
+  name: "Medical",
+  data() {
     return {
       imgArr: [
-        require('../../assets/images/medical/button_Medical01.png'),
-        require('../../assets/images/medical/button_Medical02.png'),
-        require('../../assets/images/medical/button_Medical03.png'),
-        require('../../assets/images/medical/button_Medical04.png')
-      ]
-    }
+        require("../../assets/images/medical/button_Medical01.png"),
+        require("../../assets/images/medical/button_Medical02.png"),
+        require("../../assets/images/medical/button_Medical03.png"),
+        require("../../assets/images/medical/button_Medical04.png"),
+      ],
+    };
   },
   methods: {
-    itemClick (t) {
+    itemClick(t) {
       this.$router.push({
-        name: 'aadetails',
+        name: "aadetails",
         params: {
-          id: 'med' + t
-        }
-      })
-    }
-  }
-}
+          id: "med" + t,
+        },
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -52,23 +46,25 @@ export default {
   padding: 0;
   margin: 0;
   /* border: 1px solid transparent; */
-  padding-top: 240px;
+  padding-top: 270px;
   box-sizing: border-box;
+  background-color: #016f7e;
 }
 .menu_box {
   /* margin-top: 320px; */
-  padding: 20px;
+  padding: 20px 0;
 }
 .home_menu_btn {
   width: 100%;
   /* height: 80px; */
   margin-bottom: 20px;
+  text-align: center;
 }
 .home_menu_btn:focus {
   opacity: 0.8;
 }
 .btn_img {
-  width: 100%;
+  width: 78%;
   /* height: 100%; */
 }
 </style>

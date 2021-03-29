@@ -47,25 +47,25 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: "Home",
   methods: {
-    destinationClick () {
-      this.$router.push({ path: '/des' })
+    destinationClick() {
+      this.$router.push({ path: "/des" });
     },
-    assistanceClick () {
-      this.$router.push({ path: '/ass' })
+    assistanceClick() {
+      this.$router.push({ path: "/ass" });
     },
-    medClick () {
-      this.$router.push({ path: '/med' })
+    medClick() {
+      this.$router.push({ path: "/med" });
     },
-    consultClick () {
-      this.$router.push({ path: '/consult' })
+    consultClick() {
+      this.$router.push({ path: "/consult" });
     },
-    conciergeClick () {
-      this.$router.push({ path: '/concierge' })
-    }
-  }
-}
+    conciergeClick() {
+      this.$router.push({ path: "/concierge" });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -81,23 +81,24 @@ export default {
   margin: 0;
   /* border: 1px solid transparent; */
   /* background-color: blue; */
-  padding-top: 70%;
+  padding-top: 270px;
   box-sizing: border-box;
+  background-color: #016f7e;
 }
 .menu_box {
   /* margin-top: 320px; */
-  padding: 20px;
+  padding: 20px 0;
 }
 .home_menu_btn {
   width: 100%;
   /* height: 80px; */
   margin-bottom: 20px;
+  text-align: center;
 }
 .home_menu_btn:focus {
   opacity: 0.8;
 }
 .btn_img {
-  width: 100%;
-  height: 100%;
+  width: 78%;
 }
 </style>
