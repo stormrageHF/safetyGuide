@@ -1,14 +1,8 @@
 <template>
   <div class="body_box">
     <div class="menu_box">
-      <div
-        class="home_menu_btn"
-        v-for="t in 9"
-        :key="t"
-        @click="itemClick(t)"
-      >
-        <img class="btn_img"
-        :src="imgArr[t-1]"/>
+      <div class="home_menu_btn" v-for="t in 9" :key="t" @click="itemClick(t)">
+        <img class="btn_img" :src="imgArr[t - 1]" />
       </div>
     </div>
   </div>
@@ -16,33 +10,33 @@
 
 <script>
 export default {
-  name: 'Assistance',
-  data () {
+  name: "Assistance",
+  data() {
     return {
       imgArr: [
-        require('../../assets/images/assistance/button_Assistance01.png'),
-        require('../../assets/images/assistance/button_Assistance02.png'),
-        require('../../assets/images/assistance/button_Assistance03.png'),
-        require('../../assets/images/assistance/button_Assistance04.png'),
-        require('../../assets/images/assistance/button_Assistance05.png'),
-        require('../../assets/images/assistance/button_Assistance06.png'),
-        require('../../assets/images/assistance/button_Assistance07.png'),
-        require('../../assets/images/assistance/button_Assistance08.png'),
-        require('../../assets/images/assistance/button_Assistance09.png')
-      ]
-    }
+        require("../../assets/images/assistance/button_Assistance01.png"),
+        require("../../assets/images/assistance/button_Assistance02.png"),
+        require("../../assets/images/assistance/button_Assistance03.png"),
+        require("../../assets/images/assistance/button_Assistance04.png"),
+        require("../../assets/images/assistance/button_Assistance05.png"),
+        require("../../assets/images/assistance/button_Assistance06.png"),
+        require("../../assets/images/assistance/button_Assistance07.png"),
+        require("../../assets/images/assistance/button_Assistance08.png"),
+        require("../../assets/images/assistance/button_Assistance09.png"),
+      ],
+    };
   },
   methods: {
-    itemClick (t) {
+    itemClick(t) {
       this.$router.push({
-        name: 'aadetails',
+        name: "aadetails",
         params: {
-          id: 'ass' + t
-        }
-      })
-    }
-  }
-}
+          id: "ass" + t,
+        },
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -59,8 +53,7 @@ export default {
   /* border: 1px solid transparent; */
   padding-top: 270px;
   box-sizing: border-box;
-    background-color: #016F7E;
-
+  background-color: #016f7e;
 }
 .menu_box {
   /* margin-top: 320px; */

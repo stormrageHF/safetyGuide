@@ -70,7 +70,7 @@ export default {
 
 <style scoped>
 .body_box {
-  background-image: url("../../assets/images/home/home_bg.jpeg");
+  background-image: url("../../assets/images/home/home_bg.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center top;

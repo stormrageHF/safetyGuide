@@ -88,7 +88,7 @@ export default {
   padding: 0 24px;
   white-space: pre-line; */
 
-  font-family: PingFangSC-Regular;
+  /* font-family: PingFangSC-Regular; */
   font-size: 14px;
   color: #4d4d4d;
   letter-spacing: 1px;

@@ -90,17 +90,16 @@ export default {
 .content {
   font-size: 16px;
   color: #4d4d4d;
-  letter-spacing: 1px;
   text-align: justify;
   line-height: 30px;
   padding: 0 24px;
   white-space: pre-line;
 }
 .content h3 {
-  font-family: PingFangSC-Semibold;
+  /* font-family: PingFangSC-Semibold; */
   font-size: 16px;
   color: #016f7e;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
   text-align: justify;
   line-height: 30px;
   font-weight: 600;
@@ -109,7 +108,7 @@ export default {
 }
 .content p {
   font-weight: 400;
-  font-family: PingFangSC-Regular;
+  /* font-family: PingFangSC-Regular; */
   font-size: 14px;
   color: #4d4d4d;
   letter-spacing: 0;
