@@ -90,17 +90,18 @@ export default {
 .content {
   font-size: 16px;
   color: #4d4d4d;
-  text-align: justify;
+  /* text-align: justify; */
   line-height: 30px;
-  padding: 0 24px;
+  padding: 0 20px;
   white-space: pre-line;
+  letter-spacing: 0;
 }
 .content h3 {
   /* font-family: PingFangSC-Semibold; */
   font-size: 16px;
   color: #016f7e;
-  /* letter-spacing: 1px; */
-  text-align: justify;
+  letter-spacing: 0;
+  /* text-align: justify; */
   line-height: 30px;
   font-weight: 600;
   margin-block-end: 0;
