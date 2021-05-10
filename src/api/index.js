@@ -84,3 +84,35 @@ export const GetClimate = data => {
 export const GetScenicRiskDetail = data => {
   return ajaxReq('/Manager/GetScenicRiskDetail', data, 'GET')
 }
+
+// VaccineTopData 累计统计疫苗
+export const VaccineTopData = () => {
+  return ajaxReq('/Manager/VaccineTopData', 'GET')
+}
+
+// VaccineTrendData 接种趋势排名
+export const VaccineTrendData = data => {
+  return ajaxReq('/Manager/VaccineTrendData', data, 'GET')
+}
+
+// VaccineSituationData 接种排名
+export const VaccineSituationData = data => {
+  return ajaxReq('/Manager/VaccineSituationData', data, 'GET')
+}
+
+// 疫苗获取区
+export const GetVaccineArea = data => {
+  return ajaxReq('/Manager/GetVaccineArea', data, 'GET')
+}
+
+// Manager/GetVaccineData
+export const GetVaccineData = data => {
+  return ajaxReq('/Manager/GetVaccineData', data, 'POST')
+}
+
+// 各国研发对比
+export const GetVaccineDevelop = data => {
+  return ajaxReq('/Manager/GetVaccineDevelop', data, 'GET')
+}
+
+

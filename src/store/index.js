@@ -5,11 +5,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    currentCity: ''
+  },
+  getters: {
+    getCityName(state) {
+      return state.currentCity
+    }
   },
   mutations: {
+    setCityName(state, name) {
+      state.currentCity = name
+    }
   },
   actions: {
-  },
-  modules: {
+    setCityFunc(context, name){
+      context.commit('setCityName', name)
+    }
   }
 })

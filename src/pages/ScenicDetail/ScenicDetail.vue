@@ -416,14 +416,14 @@ export default {
       viewMode: '3D'
     })
     // placesearch
-    AMap.plugin('AMap.PlaceSearch', function () {
-      var autoOptions = {
-        city: sessionStorage.cityName,
-        citylimit: true,
-        map: that.sMap
-      }
-      that.PlaceSearch = new AMap.PlaceSearch(autoOptions)
-    })
+    // AMap.plugin('AMap.PlaceSearch', function () {
+    //   var autoOptions = {
+    //     city: sessionStorage.cityName,
+    //     citylimit: true,
+    //     map: that.sMap
+    //   }
+    //   that.PlaceSearch = new AMap.PlaceSearch(autoOptions)
+    // })
   },
   components: {
     ScenicInfo,

@@ -14,6 +14,10 @@ const HealthyDetail = () => import('../pages/HealthyDetail/HealthyDetail.vue')
 const DietDetail = () => import('../pages/DietDetail/DietDetail.vue')
 const RiskDetail = () => import('../pages/RiskDetail/RiskDetail.vue')
 const Test = () => import('../components/Test/Test.vue')
+const Vaccine = () => import('@/pages/Vaccine/Vaccine.vue')
+const LiveData = () => import('@/pages/Vaccine/LiveData/LiveData.vue')
+const Appointment = () => import('@/pages/Vaccine/Appointment/Appointment.vue')
+const Research = () => import('@/pages/Vaccine/Research/Research.vue')
 
 Vue.use(Router)
 
@@ -30,7 +34,32 @@ const router = new Router({
     },
     {
       path: '/des',
-      component: Destination
+      component: Destination,
+      children: [
+        {
+          path: '/Vaccine',
+          name: "Vaccine",
+          component: Vaccine,
+          redirect: '/Vaccine/livedata',
+          children: [
+            {
+              path: 'livedata',
+              name: "LiveData",
+              component: LiveData,
+            },
+            {
+              path: 'appointment',
+              name: "Appointment",
+              component: Appointment,
+            },
+            {
+              path: 'research',
+              name: "Research",
+              component: Research,
+            }
+          ]
+        }
+      ]
     },
     {
       path: '/ass',
@@ -80,7 +109,8 @@ const router = new Router({
       path: '/Test',
       name: 'Test',
       component: Test
-    }
+    },
+
   ]
 })
 

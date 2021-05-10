@@ -37,11 +37,18 @@
         <!-- 地图 -->
 
         <!-- 高德 -->
-        <div class="amap_wrapper" id="mapContainer" v-show="this.$ProConfig.TURNONGAODE"></div>
+        <div
+          class="amap_wrapper"
+          id="mapContainer"
+          v-show="this.$ProConfig.TURNONGAODE"
+        ></div>
 
         <!-- echarts -->
-        <EchartsMap ref="EchartsMap" v-show="!this.$ProConfig.TURNONGAODE"></EchartsMap>
-        
+        <EchartsMap
+          ref="EchartsMap"
+          v-show="!this.$ProConfig.TURNONGAODE"
+        ></EchartsMap>
+
         <!-- <Test></Test> -->
 
         <div class="oversea_box">
@@ -122,6 +129,12 @@
           <p>长按并识别二维码<br />查询春运防疫政策</p>
         </div>
       </div>
+
+      <!-- 疫苗 -->
+      <div v-if="false" class="vaccineBox" @click="clickVaccine">
+        <img src="@/assets/button_vaccine.png" alt="" />
+      </div>
+
       <!-- 防护小贴士 -->
       <div class="layout_box s_container">
         <el-card class="box-card" shadow="never">
@@ -575,6 +588,8 @@ export default {
     },
     getDatas() {
       const that = this;
+      // 保存城市
+      that.$store.dispatch('setCityFunc', that.cityName)
       // 获取区县
       that.GetCountysAsync();
       // 获取疫情
@@ -750,6 +765,10 @@ export default {
         area.AreaName.includes(this.selectRegion)
       );
       // console.log(this.RiskAreaData);
+    },
+    // 显示疫苗
+    clickVaccine() {
+      this.$router.push("/Vaccine/livedata");
     },
   },
   created() {
@@ -1015,5 +1034,13 @@ export default {
   letter-spacing: 0.75px;
   line-height: 17px;
   padding-left: 8px;
+}
+.vaccineBox {
+  padding: 20px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
+.vaccineBox img {
+  width: 100%;
 }
 </style>
